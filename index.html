@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CV QuantMarketScreenerPro Multilingual Manual 2026-05-30</title>
+  <style>
+    :root{
+      --bg:#07131d;
+      --panel:#102233;
+      --panel-2:#13283b;
+      --line:#29465c;
+      --text:#e9f0f7;
+      --muted:#9ab0c4;
+      --accent:#ff9f43;
+      --accent-2:#7ad0ff;
+      --good:#54d28f;
+      --warn:#ffd166;
+      --bad:#ff6b6b;
+      --shadow:0 18px 46px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.65 "Segoe UI",Tahoma,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255,159,67,.08), transparent 28%),
+        radial-gradient(circle at top right, rgba(122,208,255,.08), transparent 26%),
+        linear-gradient(180deg, #07111a 0%, #0a1621 100%);
+    }
+    .layout{
+      display:grid;
+      grid-template-columns:320px minmax(0,1fr);
+      min-height:100vh;
+    }
+    .sidebar{
+      position:sticky;
+      top:0;
+      height:100vh;
+      overflow:auto;
+      padding:26px 22px;
+      border-right:1px solid rgba(255,255,255,.06);
+      background:rgba(6,13,21,.92);
+      backdrop-filter:blur(12px);
+    }
+    .brand,.lang-box{
+      padding:18px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.08);
+      background:linear-gradient(160deg, rgba(255,159,67,.12), rgba(122,208,255,.08));
+      box-shadow:var(--shadow);
+      margin-bottom:18px;
+    }
+    .brand h1{
+      margin:0 0 8px;
+      font-size:22px;
+      line-height:1.2;
+    }
+    .brand p,.lang-box p{
+      margin:0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .lang-buttons{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin-top:12px;
+    }
+    .lang-buttons button{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .lang-buttons button.active{
+      background:var(--accent);
+      color:#111c24;
+      border-color:transparent;
+    }
+    .sidebar nav a{
+      display:block;
+      padding:8px 12px;
+      margin:3px 0;
+      color:var(--muted);
+      text-decoration:none;
+      border-radius:10px;
+      transition:.2s ease;
+    }
+    .sidebar nav a:hover{
+      color:var(--text);
+      background:rgba(255,255,255,.05);
+      transform:translateX(3px);
+    }
+    .content{padding:32px 38px 70px}
+    .card{
+      background:linear-gradient(180deg, rgba(16,34,51,.96), rgba(11,22,33,.97));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+    }
+    .section{
+      padding:28px;
+      margin-bottom:22px;
+    }
+    .hero{
+      display:grid;
+      grid-template-columns:1.3fr .9fr;
+      gap:20px;
+      margin-bottom:22px;
+    }
+    .eyebrow{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(255,159,67,.12);
+      color:#ffc88c;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      margin-bottom:14px;
+    }
+    h2{
+      margin:0 0 14px;
+      font-size:30px;
+      line-height:1.15;
+    }
+    h3{
+      margin:0 0 12px;
+      font-size:23px;
+    }
+    h4{
+      margin:0 0 10px;
+      font-size:17px;
+    }
+    p{margin:0 0 14px}
+    .muted{color:var(--muted)}
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+      padding:24px;
+    }
+    .stat{
+      padding:16px;
+      border-radius:16px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .stat b{
+      display:block;
+      margin-bottom:6px;
+      color:var(--accent);
+      font-size:20px;
+    }
+    .grid-2,.gallery{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
+    }
+    .visual-stack{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:18px;
+    }
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:18px;
+    }
+    .module{
+      padding:18px;
+      border-radius:18px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .module ul{
+      margin:10px 0 0;
+      padding-left:18px;
+    }
+    .module li{margin:6px 0}
+    .note,.tip,.warning{
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.07);
+      margin:14px 0;
+    }
+    .note{background:rgba(122,208,255,.08)}
+    .tip{background:rgba(84,210,143,.08)}
+    .warning{background:rgba(255,209,102,.10)}
+    figure.shot{
+      margin:0;
+      padding:14px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.07);
+      background:rgba(255,255,255,.025);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .shot-head{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+      margin:0 0 12px;
+    }
+    .shot-kicker{
+      color:var(--accent-2);
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+    }
+    .shot-title{
+      margin:0;
+      font-size:18px;
+      line-height:1.25;
+    }
+    .frame{
+      position:relative;
+      overflow:hidden;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 12px 28px rgba(0,0,0,.25);
+    }
+    .frame img{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+    .shot-desc{
+      margin-top:0;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .bubble{
+      position:absolute;
+      max-width:220px;
+      padding:10px 12px;
+      border-radius:14px;
+      color:#fff;
+      font-size:12px;
+      line-height:1.35;
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 8px 24px rgba(0,0,0,.35);
+      background:rgba(7,19,29,.93);
+    }
+    .bubble.orange{border-color:rgba(255,159,67,.55); box-shadow:0 8px 24px rgba(255,159,67,.16)}
+    .bubble.blue{border-color:rgba(122,208,255,.55); box-shadow:0 8px 24px rgba(122,208,255,.16)}
+    .bubble.green{border-color:rgba(84,210,143,.55); box-shadow:0 8px 24px rgba(84,210,143,.16)}
+    .bubble.red{border-color:rgba(255,107,107,.55); box-shadow:0 8px 24px rgba(255,107,107,.16)}
+    .line{
+      position:absolute;
+      background:var(--accent);
+      transform-origin:left center;
+      height:2px;
+      border-radius:2px;
+      box-shadow:0 0 0 1px rgba(255,255,255,.04);
+    }
+    .line.blue{background:var(--accent-2)}
+    .line.green{background:var(--good)}
+    .line.red{background:var(--bad)}
+    .dot{
+      position:absolute;
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:var(--accent);
+      box-shadow:0 0 0 3px rgba(255,159,67,.18);
+    }
+    .dot.blue{background:var(--accent-2); box-shadow:0 0 0 3px rgba(122,208,255,.18)}
+    .dot.green{background:var(--good); box-shadow:0 0 0 3px rgba(84,210,143,.18)}
+    .dot.red{background:var(--bad); box-shadow:0 0 0 3px rgba(255,107,107,.18)}
+    .callouts{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+      margin-top:16px;
+    }
+    .callout{
+      padding:14px 16px;
+      border-radius:16px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.07);
+    }
+    .callout b{
+      display:block;
+      margin-bottom:8px;
+      color:var(--accent-2);
+    }
+    #tabs .gallery,
+    #overlays .gallery,
+    #panel .grid-2{
+      grid-template-columns:1fr;
+    }
+    .cta{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      padding:18px 20px;
+      border-radius:18px;
+      background:linear-gradient(135deg, rgba(122,208,255,.08), rgba(255,159,67,.08));
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .cta a{
+      display:inline-block;
+      padding:12px 16px;
+      border-radius:12px;
+      text-decoration:none;
+      color:#111c24;
+      font-weight:700;
+      background:var(--accent);
+      white-space:nowrap;
+    }
+    @media (max-width:1200px){
+      .layout{grid-template-columns:1fr}
+      .sidebar{position:relative;height:auto}
+      .content{padding:20px 14px 50px}
+      .hero,.grid-2,.grid-3,.gallery,.visual-stack,.callouts{grid-template-columns:1fr}
+      .bubble{max-width:180px;font-size:11px}
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>CV QuantMarketScreenerPro</h1>
+        <p data-i18n="brandText">Multilingual operator manual with visual annotations for dashboard, chart overlays, floating panel and input architecture.</p>
+      </div>
+      <div class="lang-box">
+        <p data-i18n="langPrompt">Language selection</p>
+        <div class="lang-buttons">
+          <button type="button" data-lang-btn="de">Deutsch</button>
+          <button type="button" data-lang-btn="en">English</button>
+          <button type="button" data-lang-btn="it">Italiano</button>
+          <button type="button" data-lang-btn="es">Español</button>
+        </div>
+      </div>
+      <nav>
+        <a href="#overview" data-i18n="navOverview">Overview</a>
+        <a href="#reading" data-i18n="navReading">Reading logic</a>
+        <a href="#dashboard" data-i18n="navDashboard">Annotated dashboard</a>
+        <a href="#tabs" data-i18n="navTabs">Tab guide</a>
+        <a href="#overlays" data-i18n="navOverlays">Overlay guide</a>
+        <a href="#panel" data-i18n="navPanel">Floating panel</a>
+        <a href="#inputs" data-i18n="navInputs">Input architecture</a>
+        <a href="#support" data-i18n="navSupport">Support prevention</a>
+        <a href="#reference" data-i18n="navReference">Technical reference</a>
+      </nav>
+    </aside>
+    <main class="content">
+      <section id="overview" class="hero">
+        <div class="card section">
+          <div class="eyebrow" data-i18n="eyebrow">Institutional Operator Manual</div>
+          <h2 data-i18n="heroTitle">Visual multilingual manual for the current project build</h2>
+          <p data-i18n="heroP1">This manual is designed to reduce support load. It explains what each dashboard area does, why a setup is blocked or released, and how the input architecture connects to the live interface.</p>
+          <p data-i18n="heroP2">The content is aligned with the current CV QuantMarketScreenerPro project structure, the active tab workflow, the preview overlays, the floating execution workstation and the current institutional input hierarchy.</p>
+        </div>
+        <div class="card stats">
+          <div class="stat"><b>26</b><span data-i18n="stat1">main input groups in the core architecture</span></div>
+          <div class="stat"><b>9</b><span data-i18n="stat2">major dashboard workspaces explained with visuals</span></div>
+          <div class="stat"><b>4</b><span data-i18n="stat3">languages available in the same manual</span></div>
+          <div class="stat"><b>1</b><span data-i18n="stat4">support-oriented visual reading model</span></div>
+        </div>
+      </section>
+
+      <section id="reading" class="card section">
+        <h3 data-i18n="readingTitle">How this manual should be used</h3>
+        <div class="grid-3">
+          <article class="module">
+            <h4 data-i18n="readingH1">First read the screen, then the inputs</h4>
+            <p data-i18n="readingP1">Most support issues come from a reversed workflow. Users start inside the input list, but the EA makes its live decisions in the dashboard, execution gate and portfolio layers.</p>
+          </article>
+          <article class="module">
+            <h4 data-i18n="readingH2">Every tab answers a different question</h4>
+            <p data-i18n="readingP2">Signal explains the thesis. Execution explains tradability. Risk explains budget fit. Structure explains price context. INST explains portfolio impact.</p>
+          </article>
+          <article class="module">
+            <h4 data-i18n="readingH3">Use the visual callouts</h4>
+            <p data-i18n="readingP3">The speech bubbles and arrows highlight the support-critical zones: opportunity list, selected symbol, blockers, execution state, overlays and manual execution controls.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="dashboard" class="card section">
+        <h3 data-i18n="dashTitle">Annotated dashboard: the main operating view</h3>
+        <figure class="shot" data-shot-group="dashboard" data-visual-id="dashboard-main">
+          <div class="frame">
+            <img src="manual_assets/Screenshot 2026-05-30 001330.png?v=docsfix2" alt="Annotated dashboard overview">
+            <div class="bubble orange" style="top:3.5%;left:3%" data-i18n="dashBubble1">Main command strip: market buttons, overlays, session profile and workspace mode.</div>
+            <div class="line" style="top:8%;left:23%;width:11%;transform:rotate(-8deg)"></div>
+            <div class="dot" style="top:10.5%;left:33.5%"></div>
+
+            <div class="bubble blue" style="top:18%;left:2%" data-i18n="dashBubble2">Opportunity table: compare symbols by signal, IQ, spread, MTF, reasons and relative priority.</div>
+            <div class="line blue" style="top:24%;left:18%;width:17%;transform:rotate(-2deg)"></div>
+            <div class="dot blue" style="top:23.8%;left:35%"></div>
+
+            <div class="bubble green" style="top:41%;left:5%" data-i18n="dashBubble3">Selected symbol and tab row: all lower blocks now belong to the highlighted instrument only.</div>
+            <div class="line green" style="top:47%;left:24%;width:13%;transform:rotate(-6deg)"></div>
+            <div class="dot green" style="top:47%;left:36.5%"></div>
+
+            <div class="bubble red" style="top:70%;left:48%" data-i18n="dashBubble4">Execution terminal: final live decision. Ready, wait or blocked is more important than any single score above.</div>
+            <div class="line red" style="top:77%;left:61%;width:16%;transform:rotate(14deg)"></div>
+            <div class="dot red" style="top:80%;left:76%"></div>
+          </div>
+          <p class="shot-desc">The dashboard should always be read from top to bottom: universe, selected symbol, thematic tab, execution verdict. This avoids false assumptions about why a trade did not trigger.</p>
+        </figure>
+        <div class="callouts">
+          <div class="callout"><b data-i18n="dashCallout1H">Signal Quality</b><span data-i18n="dashCallout1P">Measures whether the setup is structurally complete enough to stay on the active list.</span></div>
+          <div class="callout"><b data-i18n="dashCallout2H">Decision Confidence</b><span data-i18n="dashCallout2P">Shows directional conviction. High conviction is still not permission if risk or execution gates block the trade.</span></div>
+          <div class="callout"><b data-i18n="dashCallout3H">Execution State</b><span data-i18n="dashCallout3P">This is the final practical outcome. When users report missing trades, this is the first block to inspect.</span></div>
+        </div>
+      </section>
+
+      <section id="tabs" class="card section">
+        <h3 data-i18n="tabsTitle">Tab guide: what each workspace answers</h3>
+        <div class="visual-stack">
+          <figure class="shot" data-shot-group="tabs" data-visual-id="tab-signal">
+            <div class="frame">
+              <img src="manual_assets/Screenshot 2026-05-30 001400.png?v=docsfix2" alt="Signal tab">
+            </div>
+            <p class="shot-desc" data-i18n="tabSignal">Signal tab: answers “what is the trade thesis?” It exposes structure phase, session, volume state, positive drivers and the exact blockers that stop readiness.</p>
+          </figure>
+          <figure class="shot" data-shot-group="tabs" data-visual-id="tab-execution">
+            <div class="frame">
+              <img src="manual_assets/Screenshot 2026-05-30 001412.png?v=docsfix2" alt="Execution tab">
+              <div class="bubble red" style="top:12%;left:64%" data-i18n="execBubble1">Spread and slip can block an otherwise valid setup.</div>
+              <div class="line red" style="top:20%;left:69%;width:11%;transform:rotate(15deg)"></div>
+              <div class="dot red" style="top:23%;left:80%"></div>
+            </div>
+            <p class="shot-desc" data-i18n="tabExecution">Execution tab: answers “why is the trade ready or not ready?” It clarifies fill quality, spread regime, pending safety and blocked-by reasons.</p>
+          </figure>
+          <figure class="shot" data-shot-group="tabs" data-visual-id="tab-risk">
+            <div class="frame">
+              <img src="manual_assets/Screenshot 2026-05-30 001426.png?v=docsfix2" alt="Risk tab">
+            </div>
+            <p class="shot-desc" data-i18n="tabRisk">Risk tab: answers “does the setup still fit the current risk envelope?” This is the right place for blocked but visually attractive opportunities.</p>
+          </figure>
+          <figure class="shot" data-shot-group="tabs" data-visual-id="tab-structure">
+            <div class="frame">
+              <img src="manual_assets/Screenshot 2026-05-30 001448.png?v=docsfix2" alt="Structure tab">
+            </div>
+            <p class="shot-desc" data-i18n="tabStructure">Structure tab: answers “how do price, VWAP and structure levels relate?” It is the price map for discretionary confirmation.</p>
+          </figure>
+          <figure class="shot" data-shot-group="tabs" data-visual-id="tab-analytics">
+            <div class="frame">
+              <img src="manual_assets/Screenshot 2026-05-30 001511.png?v=docsfix2" alt="Analytics tab">
+            </div>
+            <p class="shot-desc" data-i18n="tabAnalytics">Analytics tab: answers “which metric stack is helping or hurting the setup?” Use it for tuning, not for blind trading decisions.</p>
+          </figure>
+          <figure class="shot" data-shot-group="tabs" data-visual-id="tab-ai">
+            <div class="frame">
+              <img src="manual_assets/Screenshot 2026-05-30 001526.png?v=docsfix2" alt="AI tab">
+            </div>
+            <p class="shot-desc" data-i18n="tabAI">AI tab: answers “what does the adaptive layer support or resist?” It helps separate core blockers from secondary adaptive influences.</p>
+          </figure>
+          <figure class="shot" data-shot-group="tabs" data-visual-id="tab-gauge">
+            <div class="frame">
+              <img src="manual_assets/Screenshot 2026-05-30 001546.png?v=docsfix2" alt="Gauge tab">
+            </div>
+            <p class="shot-desc" data-i18n="tabGauge">Gauge tab: answers “how do classical oscillators and moving averages read in aggregate?” Useful for fast orientation, not as a standalone execution rule.</p>
+          </figure>
+          <figure class="shot" data-shot-group="tabs" data-visual-id="tab-inst">
+            <div class="frame">
+              <img src="manual_assets/Screenshot 2026-05-30 001559.png?v=docsfix2" alt="INST tab">
+              <div class="bubble blue" style="top:15%;left:2%" data-i18n="instBubble1">Portfolio intelligence: use this area before enabling broad auto execution.</div>
+              <div class="line blue" style="top:24%;left:23%;width:12%;transform:rotate(-6deg)"></div>
+              <div class="dot blue" style="top:24.5%;left:34%"></div>
+
+              <div class="bubble orange" style="top:35%;left:55%" data-i18n="instBubble2">Correlation and diversification explain why a good symbol may still be strategically weak.</div>
+              <div class="line" style="top:46%;left:66%;width:12%;transform:rotate(9deg)"></div>
+              <div class="dot" style="top:48%;left:79%"></div>
+            </div>
+            <p class="shot-desc" data-i18n="tabInst">INST tab: answers “what is the portfolio impact?” It combines exposure, opportunity ranking, diversification and selected-symbol portfolio context.</p>
+          </figure>
+        </div>
+      </section>
+
+      <section id="overlays" class="card section">
+        <h3 data-i18n="overlayTitle">Overlay guide: forecast, profile, zones and deep context</h3>
+        <div class="visual-stack">
+          <figure class="shot" data-shot-group="overlays" data-visual-id="overlay-forecast">
+            <div class="frame">
+              <img src="manual_assets/Screenshot 2026-05-30 001616.png?v=docsfix2" alt="Forecast overlay">
+            </div>
+            <p class="shot-desc" data-i18n="overlayForecast">Forecast overlay: projected path for a setup idea. It is a scenario tool, not a guaranteed target path.</p>
+          </figure>
+          <figure class="shot" data-shot-group="overlays" data-visual-id="overlay-profile">
+            <div class="frame">
+              <img src="manual_assets/Screenshot 2026-05-30 001810.png?v=docsfix2" alt="Market profile overlay">
+            </div>
+            <p class="shot-desc" data-i18n="overlayProfile">Market profile overlay: identifies acceptance, value area and POC. Use it to judge whether price sits in balance, rejection or breakout terrain.</p>
+          </figure>
+          <figure class="shot" data-shot-group="overlays" data-visual-id="overlay-sd">
+            <div class="frame">
+              <img src="manual_assets/Screenshot 2026-05-30 001848.png?v=docsfix2" alt="Supply demand overlay">
+            </div>
+            <p class="shot-desc" data-i18n="overlaySD">Supply and demand zones: visual risk map for entries, retests, reaction levels and invalidation awareness.</p>
+          </figure>
+          <figure class="shot" data-shot-group="overlays" data-visual-id="overlay-deep">
+            <div class="frame">
+              <img src="manual_assets/Screenshot 2026-05-30 001924.png?v=docsfix2" alt="Deep context overlay stack">
+            </div>
+            <p class="shot-desc" data-i18n="overlayDeep">Deep context view: combines Fibo, MACD, ADX and stochastic divergence for a full contextual read of one selected instrument.</p>
+          </figure>
+        </div>
+        <div class="note" data-i18n="overlayNote">Best practice: read the dashboard thesis first, then validate the chart overlay. Starting with the chart often leads to support questions caused by ignored execution or risk blockers.</div>
+      </section>
+
+      <section id="panel" class="card section">
+        <h3 data-i18n="panelTitle">Floating panel / position sizer workstation</h3>
+        <div class="visual-stack">
+          <figure class="shot" data-shot-group="panel" data-visual-id="panel-market">
+            <div class="frame">
+              <img src="manual_assets/Screenshot 2026-05-30 002036.png?v=docsfix2" alt="Floating panel market mode">
+              <div class="bubble green" style="top:7%;left:58%" data-i18n="panelBubble1">Order mode changes here. Market, limit and stop are separate operating workflows.</div>
+              <div class="line green" style="top:13%;left:70%;width:10%;transform:rotate(-3deg)"></div>
+              <div class="dot green" style="top:13%;left:80.5%"></div>
+
+              <div class="bubble orange" style="top:38%;left:4%" data-i18n="panelBubble2">Runtime inputs let the operator adjust risk, lots and ATR multipliers during the session.</div>
+              <div class="line" style="top:47%;left:28%;width:11%;transform:rotate(7deg)"></div>
+              <div class="dot" style="top:48.5%;left:39%"></div>
+
+              <div class="bubble red" style="top:70%;left:56%" data-i18n="panelBubble3">Action block: buy, sell, close, reverse, trail and auto controls. This area must remain consistent with the global execution permissions.</div>
+              <div class="line red" style="top:79%;left:68%;width:10%;transform:rotate(12deg)"></div>
+              <div class="dot red" style="top:82%;left:78%"></div>
+            </div>
+            <p class="shot-desc" data-i18n="panelMarket">Market mode: for immediate manual execution with current risk inputs and live gating.</p>
+          </figure>
+          <figure class="shot" data-shot-group="panel" data-visual-id="panel-limit">
+            <div class="frame">
+              <img src="manual_assets/Screenshot 2026-05-30 002308.png?v=docsfix2" alt="Floating panel limit mode">
+            </div>
+            <p class="shot-desc" data-i18n="panelLimit">Limit mode: for staged entries with visible price ladders, target levels and zone-based placement logic.</p>
+          </figure>
+        </div>
+        <div class="warning" data-i18n="panelWarning">Important: the floating panel is an operator interface, not a bypass mechanism. If risk, news or decision layers block a setup, manual action should not override institutional governance without intent.</div>
+      </section>
+
+      <section id="inputs" class="card section">
+        <h3 data-i18n="inputTitle">Input architecture: what the major groups control</h3>
+        <div class="grid-3">
+          <article class="module">
+            <h4 data-i18n="inputH1">Groups 01 to 09</h4>
+            <p data-i18n="inputP1">Universe, MTF engine, display logic, alerts, chart workflow, execution core, drawdown control and adaptive intelligence. This is the platform base.</p>
+          </article>
+          <article class="module">
+            <h4 data-i18n="inputH2">Groups 10 to 18</h4>
+            <p data-i18n="inputP2">Tester profile, dynamic universe, capital allocation, broker calibration, auto profile, survival engine, volume spike assist, frequency governor and execution quality gate.</p>
+          </article>
+          <article class="module">
+            <h4 data-i18n="inputH3">Groups 19 to 26</h4>
+            <p data-i18n="inputP3">Validation, preview overlays, institutional signal intelligence, decision engine, open/close matrix, news, portfolio risk and pro trader controls.</p>
+          </article>
+        </div>
+        <div class="tip" data-i18n="inputTip">Professional workflow: stabilize universe and runtime first, then validate signal layers, then enable execution, then refine floating panel and hotkeys.</div>
+      </section>
+
+      <section id="support" class="card section">
+        <h3 data-i18n="supportTitle">Support prevention checklist</h3>
+        <div class="grid-2">
+          <article class="module">
+            <h4 data-i18n="supportH1">When a trade did not open</h4>
+            <ul data-i18n-html="supportList1"></ul>
+          </article>
+          <article class="module">
+            <h4 data-i18n="supportH2">When the screen feels inconsistent</h4>
+            <ul data-i18n-html="supportList2"></ul>
+          </article>
+        </div>
+        <div class="note" data-i18n="supportNote">Most recurring support tickets disappear when users learn to read the dashboard, then execution, then risk, and only then the deeper input groups.</div>
+      </section>
+
+      <section id="reference" class="card section">
+        <h3 data-i18n="refTitle">Technical reference</h3>
+        <div class="cta">
+          <div>
+            <p><b data-i18n="refBold">Included:</b> <span data-i18n="refP1">the current technical input reference for the active project build.</span></p>
+            <p class="muted" data-i18n="refP2">Use the visual manual for operation and the technical reference for exact parameter lookup.</p>
+          </div>
+          <a href="CV_QuantMarketScreenerPro_InputReference_2026-05-30.html?lang=de&v=docsfix4" data-ref-link data-i18n="refBtn">Open input reference</a>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+    const translations = {
+      de: {
+        title: "CV QuantMarketScreenerPro Mehrsprachen-Bedienungsanleitung 2026-05-30",
+        brandText: "Mehrsprachige Bedienungsanleitung mit visuellen Annotationen fuer Dashboard, Chart-Overlays, Floating Panel und Input-Architektur.",
+        langPrompt: "Sprachauswahl",
+        navOverview: "Ueberblick",
+        navReading: "Leselogik",
+        navDashboard: "Annotiertes Dashboard",
+        navTabs: "Tab-Fuehrung",
+        navOverlays: "Overlay-Leitfaden",
+        navPanel: "Floating Panel",
+        navInputs: "Input-Architektur",
+        navSupport: "Support-Vermeidung",
+        navReference: "Technische Referenz",
+        eyebrow: "Institutional Operator Manual",
+        heroTitle: "Visuelle Mehrsprachen-Anleitung fuer den aktuellen Projektstand",
+        heroP1: "Diese Anleitung ist darauf ausgelegt, Supportanfragen zu senken. Sie erklaert, was jeder Dashboard-Bereich macht, warum ein Setup blockiert oder freigegeben wird und wie die Input-Architektur mit der Live-Oberflaeche zusammenhaengt.",
+        heroP2: "Der Inhalt ist auf die aktuelle Struktur von CV QuantMarketScreenerPro, den aktiven Tab-Workflow, die Preview-Overlays, die Floating-Execution-Workstation und die institutionelle Input-Hierarchie abgestimmt.",
+        stat1: "Kern-Inputgruppen in der Hauptarchitektur",
+        stat2: "grosse Dashboard-Workspaces mit Bilderklaerung",
+        stat3: "Sprachen in derselben Anleitung",
+        stat4: "visuelles Lesemodell zur Support-Reduktion",
+        readingTitle: "So sollte diese Anleitung benutzt werden",
+        readingH1: "Zuerst den Screen lesen, dann die Inputs",
+        readingP1: "Die meisten Supportprobleme entstehen durch einen umgekehrten Ablauf. Nutzer starten in der Inputliste, die Live-Entscheidungen werden aber im Dashboard, im Execution Gate und im Portfolio-Layer getroffen.",
+        readingH2: "Jeder Tab beantwortet eine andere Frage",
+        readingP2: "Signal erklaert die These. Execution erklaert die Handelbarkeit. Risk erklaert die Budget-Passung. Structure erklaert den Preis-Kontext. INST erklaert den Portfolio-Effekt.",
+        readingH3: "Die visuellen Marker benutzen",
+        readingP3: "Sprechblasen und Pfeile markieren die supportkritischen Zonen: Opportunity-Liste, Selected Symbol, Blocker, Execution-Zustand, Overlays und manuelle Ausfuehrungskontrollen.",
+        dashTitle: "Annotiertes Dashboard: die zentrale Arbeitsansicht",
+        dashBubble1: "Haupt-Kommandoleiste: Markt-Buttons, Overlays, Session-Profil und Workspace-Modus.",
+        dashBubble2: "Opportunity-Tabelle: vergleicht Symbole nach Signal, IQ, Spread, MTF, Begruendung und Prioritaet.",
+        dashBubble3: "Selected Symbol und Tab-Zeile: alle unteren Bloecke gehoeren jetzt nur noch zu diesem Instrument.",
+        dashBubble4: "Execution Terminal: finales Live-Urteil. Ready, wait oder blocked ist wichtiger als jede einzelne Kennzahl darueber.",
+        dashCaption: "Das Dashboard sollte immer von oben nach unten gelesen werden: Universe, Selected Symbol, Themen-Tab, Execution-Urteil. So vermeidest du falsche Annahmen darueber, warum ein Trade nicht ausgelost wurde.",
+        dashCallout1H: "Signal Quality",
+        dashCallout1P: "Misst, ob das Setup strukturell vollstaendig genug ist, um aktiv beobachtet zu werden.",
+        dashCallout2H: "Decision Confidence",
+        dashCallout2P: "Zeigt die Richtungsueberzeugung. Hohe Ueberzeugung ist noch keine Freigabe, wenn Risk oder Execution blockieren.",
+        dashCallout3H: "Execution State",
+        dashCallout3P: "Das operative Endergebnis. Wenn Trades fehlen, wird dieser Block zuerst geprueft.",
+        tabsTitle: "Tab-Fuehrung: welche Frage jeder Workspace beantwortet",
+        tabSignal: "Signal-Tab: beantwortet „Was ist die Trade-These?“. Er zeigt Strukturphase, Session, Volumenzustand, positive Treiber und die exakten Blocker der Readiness.",
+        tabExecution: "Execution-Tab: beantwortet „Warum ist der Trade bereit oder nicht bereit?“. Er klaert Fill-Qualitaet, Spread-Regime, Pending-Safety und Blocked-by-Gruende.",
+        execBubble1: "Spread und Slip koennen ein fachlich gutes Setup trotzdem blockieren.",
+        tabRisk: "Risk-Tab: beantwortet „Passt das Setup noch in das aktuelle Risikofenster?“. Hierher gehoeren visuell gute, aber trotzdem blockierte Opportunities.",
+        tabStructure: "Structure-Tab: beantwortet „Wie verhalten sich Preis, VWAP und Strukturlevel zueinander?“. Das ist die Preislandkarte fuer diskretionaere Bestaetigung.",
+        tabAnalytics: "Analytics-Tab: beantwortet „Welche Kennzahl stuetzt oder belastet den Gesamtscore?“. Gut fuer Tuning, nicht fuer blindes Trading.",
+        tabAI: "AI-Tab: beantwortet „Welche adaptive Logik stuetzt oder bremst den Trade?“. So trennt man Kern-Blocker von sekundaeren adaptiven Einfluessen.",
+        tabGauge: "Gauge-Tab: beantwortet „Wie lesen sich klassische Oszillatoren und gleitende Durchschnitte aggregiert?“. Gut fuer schnelle Orientierung, aber nie als alleinige Orderregel.",
+        instBubble1: "Portfolio Intelligence: diesen Bereich vor breiter Auto-Execution immer pruefen.",
+        instBubble2: "Korrelation und Diversifikation erklaeren, warum ein gutes Symbol strategisch trotzdem schwach sein kann.",
+        tabInst: "INST-Tab: beantwortet „Wie ist der Portfolio-Effekt?“. Er kombiniert Exposure, Opportunity-Ranking, Diversifikation und den Portfolio-Kontext des ausgewaehlten Symbols.",
+        overlayTitle: "Overlay-Leitfaden: Forecast, Profile, Zonen und Tiefenkontext",
+        overlayForecast: "Forecast-Overlay: projizierter Pfad einer Setup-Idee. Es ist ein Szenario-Werkzeug, kein garantierter Zielpfad.",
+        overlayProfile: "Market-Profile-Overlay: identifiziert Akzeptanz, Value Area und POC. Nutze es, um Balance, Rejection oder Breakout-Terrain zu beurteilen.",
+        overlaySD: "Supply-and-Demand-Zonen: visuelle Risikokarte fuer Entries, Retests, Reaktionslevel und Invalidierungsbewusstsein.",
+        overlayDeep: "Tiefenkontext-Ansicht: kombiniert Fibo, MACD, ADX und Stoch-Divergenz fuer eine vollstaendige Einzelsymbol-Lesung.",
+        overlayNote: "Best Practice: zuerst die Dashboard-These lesen, dann das Chart-Overlay verifizieren. Wer mit dem Chart beginnt, uebersieht oft Risk- oder Execution-Blocker.",
+        panelTitle: "Floating Panel / Position Sizer Workstation",
+        panelBubble1: "Hier wechselt der Ordermodus. Market, Limit und Stop sind getrennte Operator-Workflows.",
+        panelBubble2: "Runtime Inputs erlauben dem Operator, Risk, Lots und ATR-Multiplikatoren waehrend der Session anzupassen.",
+        panelBubble3: "Action-Block: Buy, Sell, Close, Reverse, Trail und Auto. Dieser Bereich muss mit den globalen Execution-Freigaben konsistent bleiben.",
+        panelMarket: "Market-Modus: fuer sofortige manuelle Ausfuehrung mit aktuellen Risk-Inputs und Live-Gating.",
+        panelLimit: "Limit-Modus: fuer gestufte Entries mit sichtbaren Preisleitern, Zielniveaus und zonenbasierter Platzierungslogik.",
+        panelWarning: "Wichtig: Das Floating Panel ist ein Operator-Interface, kein Umgehungswerkzeug. Wenn Risk-, News- oder Decision-Layer blockieren, sollte man nicht ohne klare Absicht dagegen handeln.",
+        inputTitle: "Input-Architektur: was die grossen Gruppen steuern",
+        inputH1: "Gruppen 01 bis 09",
+        inputP1: "Universe, MTF-Engine, Display-Logik, Alerts, Chart-Workflow, Execution Core, Drawdown-Control und adaptive Intelligenz. Das ist die Plattformbasis.",
+        inputH2: "Gruppen 10 bis 18",
+        inputP2: "Tester-Profil, Dynamic Universe, Capital Allocation, Broker Calibration, Auto Profile, Survival Engine, Volume Spike Assist, Frequency Governor und Execution Quality Gate.",
+        inputH3: "Gruppen 19 bis 26",
+        inputP3: "Validation, Preview-Overlays, Institutional Signal Intelligence, Decision Engine, Open/Close Matrix, News, Portfolio-Risk und Pro-Trader-Controls.",
+        inputTip: "Professioneller Workflow: zuerst Universe und Runtime stabilisieren, dann Signal-Layer verifizieren, dann Execution freigeben, dann Floating Panel und Hotkeys verfeinern.",
+        supportTitle: "Checkliste zur Support-Vermeidung",
+        supportH1: "Wenn ein Trade nicht geoeffnet wurde",
+        supportH2: "Wenn der Screen inkonsistent wirkt",
+        supportList1: "<li>Execution Terminal auf <code>blocked</code>, <code>wait</code> oder <code>ready</code> pruefen.</li><li>Execution-Tab auf Spread, Slip, Pending Safety und Blocked-by lesen.</li><li>Risk-Tab auf Budget, Liquidity, Alignment und Session-Kontext lesen.</li><li>INST-Tab pruefen, ob Portfolio- oder Korrelationslogik die Freigabe schwacht.</li>",
+        supportList2: "<li>Selected Symbol und aktiven Tab kontrollieren.</li><li>Overlay-Sichtbarkeit mit den Preview-Schaltern und Hotkeys abgleichen.</li><li>Bei Traegheit Runtime-, Watchdog- und Recovery-Bloecke pruefen.</li><li>Beim Floating Panel Gate, Runtime Diagnostics und Execution Permissions gegenpruefen.</li>",
+        supportNote: "Die meisten wiederkehrenden Supporttickets verschwinden, wenn Nutzer lernen: erst Dashboard, dann Execution, dann Risk und erst danach die tieferen Inputgruppen.",
+        refTitle: "Technische Referenz",
+        refBold: "Enthalten:",
+        refP1: "die aktuelle technische Input-Referenz fuer den aktiven Projektstand.",
+        refP2: "Nutze die visuelle Anleitung fuer die Bedienung und die technische Referenz fuer exakte Parameter-Nachschlaege.",
+        refBtn: "Input-Referenz oeffnen"
+      },
+      en: {
+        title: "CV QuantMarketScreenerPro Multilingual Manual 2026-05-30",
+        brandText: "Multilingual operator manual with visual annotations for dashboard, chart overlays, floating panel and input architecture.",
+        langPrompt: "Language selection",
+        navOverview: "Overview",
+        navReading: "Reading logic",
+        navDashboard: "Annotated dashboard",
+        navTabs: "Tab guide",
+        navOverlays: "Overlay guide",
+        navPanel: "Floating panel",
+        navInputs: "Input architecture",
+        navSupport: "Support prevention",
+        navReference: "Technical reference",
+        eyebrow: "Institutional Operator Manual",
+        heroTitle: "Visual multilingual manual for the current project build",
+        heroP1: "This manual is designed to reduce support load. It explains what each dashboard area does, why a setup is blocked or released, and how the input architecture connects to the live interface.",
+        heroP2: "The content is aligned with the current CV QuantMarketScreenerPro structure, the active tab workflow, the preview overlays, the floating execution workstation and the institutional input hierarchy.",
+        stat1: "main input groups in the core architecture",
+        stat2: "major dashboard workspaces explained with visuals",
+        stat3: "languages available in the same manual",
+        stat4: "support-oriented visual reading model",
+        readingTitle: "How this manual should be used",
+        readingH1: "Read the screen first, then the inputs",
+        readingP1: "Most support issues come from a reversed workflow. Users start in the input list, but the EA makes live decisions in the dashboard, execution gate and portfolio layers.",
+        readingH2: "Each tab answers a different question",
+        readingP2: "Signal explains the thesis. Execution explains tradability. Risk explains budget fit. Structure explains price context. INST explains portfolio impact.",
+        readingH3: "Use the visual markers",
+        readingP3: "Speech bubbles and arrows highlight the support-critical zones: opportunity list, selected symbol, blockers, execution state, overlays and manual execution controls.",
+        dashTitle: "Annotated dashboard: the main operating view",
+        dashBubble1: "Main command strip: market buttons, overlays, session profile and workspace mode.",
+        dashBubble2: "Opportunity table: compare symbols by signal, IQ, spread, MTF, reasons and priority.",
+        dashBubble3: "Selected symbol and tab row: all lower blocks now belong only to this instrument.",
+        dashBubble4: "Execution terminal: final live verdict. Ready, wait or blocked matters more than any isolated score above.",
+        dashCaption: "The dashboard should always be read from top to bottom: universe, selected symbol, thematic tab, execution verdict. This prevents false assumptions about missing trades.",
+        dashCallout1H: "Signal Quality",
+        dashCallout1P: "Measures whether the setup is structurally complete enough to stay active.",
+        dashCallout2H: "Decision Confidence",
+        dashCallout2P: "Shows directional conviction. High conviction is still not permission if risk or execution gates block the trade.",
+        dashCallout3H: "Execution State",
+        dashCallout3P: "The practical final outcome. When trades are missing, inspect this block first.",
+        tabsTitle: "Tab guide: what each workspace answers",
+        tabSignal: "Signal tab: answers “what is the trade thesis?” It shows structure phase, session, volume state, positive drivers and the exact blockers of readiness.",
+        tabExecution: "Execution tab: answers “why is the trade ready or not ready?” It clarifies fill quality, spread regime, pending safety and blocked-by reasons.",
+        execBubble1: "Spread and slip can still block an otherwise valid setup.",
+        tabRisk: "Risk tab: answers “does the setup still fit the current risk envelope?” This is the correct place for visually attractive but blocked opportunities.",
+        tabStructure: "Structure tab: answers “how do price, VWAP and structure levels relate?” It is the price map for discretionary confirmation.",
+        tabAnalytics: "Analytics tab: answers “which metric is helping or hurting the total score?” Useful for tuning, not for blind execution.",
+        tabAI: "AI tab: answers “what is the adaptive layer supporting or resisting?” It separates core blockers from secondary adaptive influence.",
+        tabGauge: "Gauge tab: answers “how do classical oscillators and moving averages read in aggregate?” Useful for orientation, never as a standalone order rule.",
+        instBubble1: "Portfolio intelligence: inspect this area before enabling broad auto execution.",
+        instBubble2: "Correlation and diversification explain why a good symbol may still be strategically weak.",
+        tabInst: "INST tab: answers “what is the portfolio impact?” It combines exposure, opportunity ranking, diversification and selected-symbol portfolio context.",
+        overlayTitle: "Overlay guide: forecast, profile, zones and deep context",
+        overlayForecast: "Forecast overlay: projected path for a setup idea. It is a scenario tool, not a guaranteed target path.",
+        overlayProfile: "Market profile overlay: identifies acceptance, value area and POC. Use it to judge balance, rejection or breakout terrain.",
+        overlaySD: "Supply and demand zones: visual risk map for entries, retests, reaction levels and invalidation awareness.",
+        overlayDeep: "Deep context view: combines Fibo, MACD, ADX and stochastic divergence for a full single-instrument read.",
+        overlayNote: "Best practice: read the dashboard thesis first, then validate the chart overlay. Starting with the chart often ignores risk or execution blockers.",
+        panelTitle: "Floating panel / position sizer workstation",
+        panelBubble1: "Order mode changes here. Market, limit and stop are separate operator workflows.",
+        panelBubble2: "Runtime inputs allow the operator to adjust risk, lots and ATR multipliers during the session.",
+        panelBubble3: "Action block: buy, sell, close, reverse, trail and auto. This area must remain consistent with global execution permissions.",
+        panelMarket: "Market mode: for immediate manual execution with current risk inputs and live gating.",
+        panelLimit: "Limit mode: for staged entries with visible price ladders, target levels and zone-based placement logic.",
+        panelWarning: "Important: the floating panel is an operator interface, not a bypass tool. If risk, news or decision layers block a setup, manual action should not override governance without intent.",
+        inputTitle: "Input architecture: what the major groups control",
+        inputH1: "Groups 01 to 09",
+        inputP1: "Universe, MTF engine, display logic, alerts, chart workflow, execution core, drawdown control and adaptive intelligence. This is the platform base.",
+        inputH2: "Groups 10 to 18",
+        inputP2: "Tester profile, dynamic universe, capital allocation, broker calibration, auto profile, survival engine, volume spike assist, frequency governor and execution quality gate.",
+        inputH3: "Groups 19 to 26",
+        inputP3: "Validation, preview overlays, institutional signal intelligence, decision engine, open/close matrix, news, portfolio risk and pro trader controls.",
+        inputTip: "Professional workflow: stabilize universe and runtime first, then validate signal layers, then enable execution, then refine floating panel and hotkeys.",
+        supportTitle: "Support prevention checklist",
+        supportH1: "When a trade did not open",
+        supportH2: "When the screen feels inconsistent",
+        supportList1: "<li>Check whether the execution terminal says <code>blocked</code>, <code>wait</code> or <code>ready</code>.</li><li>Read the execution tab for spread, slip, pending safety and blocked-by reasons.</li><li>Read the risk tab for budget, liquidity, alignment and session context.</li><li>Check the INST tab for portfolio or correlation logic weakening the release.</li>",
+        supportList2: "<li>Verify the selected symbol and active tab.</li><li>Match overlay visibility against preview toggles and hotkeys.</li><li>For sluggishness, inspect runtime, watchdog and recovery blocks.</li><li>For floating panel issues, validate gate, runtime diagnostics and execution permissions.</li>",
+        supportNote: "Most recurring support tickets disappear when users learn to read dashboard first, then execution, then risk, and only then the deeper input groups.",
+        refTitle: "Technical reference",
+        refBold: "Included:",
+        refP1: "the current technical input reference for the active project build.",
+        refP2: "Use the visual manual for operation and the technical reference for exact parameter lookup.",
+        refBtn: "Open input reference"
+      },
+      it: {
+        title: "CV QuantMarketScreenerPro Manuale Multilingue 2026-05-30",
+        brandText: "Manuale operativo multilingue con annotazioni visive per dashboard, overlay grafici, pannello flottante e architettura degli input.",
+        langPrompt: "Selezione lingua",
+        navOverview: "Panoramica",
+        navReading: "Logica di lettura",
+        navDashboard: "Dashboard annotata",
+        navTabs: "Guida alle tab",
+        navOverlays: "Guida overlay",
+        navPanel: "Pannello flottante",
+        navInputs: "Architettura input",
+        navSupport: "Prevenzione supporto",
+        navReference: "Riferimento tecnico",
+        eyebrow: "Institutional Operator Manual",
+        heroTitle: "Manuale visivo multilingue per la build attuale del progetto",
+        heroP1: "Questo manuale e progettato per ridurre le richieste di supporto. Spiega cosa fa ogni area della dashboard, perche un setup viene bloccato o rilasciato e come l'architettura degli input si collega all'interfaccia live.",
+        heroP2: "Il contenuto e allineato alla struttura attuale di CV QuantMarketScreenerPro, al workflow delle tab attive, agli overlay di preview, alla floating execution workstation e alla gerarchia istituzionale degli input.",
+        stat1: "gruppi principali di input nell'architettura core",
+        stat2: "workspace principali della dashboard spiegati con immagini",
+        stat3: "lingue disponibili nello stesso manuale",
+        stat4: "modello visivo orientato alla riduzione del supporto",
+        readingTitle: "Come usare questo manuale",
+        readingH1: "Leggere prima lo schermo, poi gli input",
+        readingP1: "Molti problemi di supporto nascono da un flusso invertito. Gli utenti partono dalla lista input, ma l'EA prende decisioni live nella dashboard, nell'execution gate e nei livelli portfolio.",
+        readingH2: "Ogni tab risponde a una domanda diversa",
+        readingP2: "Signal spiega la tesi. Execution spiega la negoziabilita. Risk spiega l'adattamento al budget. Structure spiega il contesto prezzo. INST spiega l'impatto sul portafoglio.",
+        readingH3: "Usare i marcatori visivi",
+        readingP3: "Fumetti e frecce evidenziano le aree critiche per il supporto: lista opportunita, selected symbol, blocker, stato di execution, overlay e controlli manuali.",
+        dashTitle: "Dashboard annotata: la vista operativa principale",
+        dashBubble1: "Barra di comando principale: pulsanti di mercato, overlay, profilo sessione e modalita workspace.",
+        dashBubble2: "Tabella opportunita: confronta i simboli per segnale, IQ, spread, MTF, motivazioni e priorita.",
+        dashBubble3: "Selected symbol e riga delle tab: tutti i blocchi inferiori appartengono ora solo a questo strumento.",
+        dashBubble4: "Execution terminal: verdetto live finale. Ready, wait o blocked conta piu di qualunque singolo punteggio sopra.",
+        dashCaption: "La dashboard va letta sempre dall'alto verso il basso: universo, simbolo selezionato, tab tematica, verdetto di execution. Questo evita false supposizioni sui trade mancati.",
+        dashCallout1H: "Signal Quality",
+        dashCallout1P: "Misura se il setup e abbastanza completo dal punto di vista strutturale per restare attivo.",
+        dashCallout2H: "Decision Confidence",
+        dashCallout2P: "Mostra la convinzione direzionale. Un'alta convinzione non e ancora un permesso se risk o execution bloccano il trade.",
+        dashCallout3H: "Execution State",
+        dashCallout3P: "Il risultato operativo finale. Se mancano trade, questo blocco si controlla per primo.",
+        tabsTitle: "Guida alle tab: quale domanda risponde ogni workspace",
+        tabSignal: "Tab Signal: risponde a “qual e la tesi del trade?”. Mostra fase strutturale, sessione, stato del volume, driver positivi e blocker esatti della readiness.",
+        tabExecution: "Tab Execution: risponde a “perche il trade e pronto o non pronto?”. Chiarisce fill quality, spread regime, pending safety e blocked-by reasons.",
+        execBubble1: "Spread e slip possono bloccare anche un setup altrimenti valido.",
+        tabRisk: "Tab Risk: risponde a “il setup rientra ancora nell'envelope di rischio attuale?”. E il posto giusto per opportunita visivamente buone ma bloccate.",
+        tabStructure: "Tab Structure: risponde a “come si relazionano prezzo, VWAP e livelli strutturali?”. E la mappa prezzo per la conferma discrezionale.",
+        tabAnalytics: "Tab Analytics: risponde a “quale metrica sta aiutando o danneggiando il punteggio totale?”. Utile per il tuning, non per esecuzione cieca.",
+        tabAI: "Tab AI: risponde a “cosa supporta o contrasta il layer adattivo?”. Separa i blocker core dall'influenza adattiva secondaria.",
+        tabGauge: "Tab Gauge: risponde a “come leggono in aggregato oscillatori classici e medie mobili?”. Utile per orientamento rapido, mai come regola di ordine autonoma.",
+        instBubble1: "Intelligenza portfolio: controllare quest'area prima di attivare una auto execution ampia.",
+        instBubble2: "Correlazione e diversificazione spiegano perche un buon simbolo puo essere comunque strategicamente debole.",
+        tabInst: "Tab INST: risponde a “qual e l'impatto sul portafoglio?”. Combina exposure, ranking opportunita, diversificazione e contesto portfolio del simbolo selezionato.",
+        overlayTitle: "Guida overlay: forecast, profile, zone e contesto profondo",
+        overlayForecast: "Overlay Forecast: percorso proiettato per un'idea di setup. E uno strumento di scenario, non un target garantito.",
+        overlayProfile: "Overlay Market Profile: identifica accettazione, value area e POC. Usalo per valutare balance, rejection o breakout terrain.",
+        overlaySD: "Zone supply e demand: mappa visiva del rischio per entry, retest, livelli di reazione e consapevolezza dell'invalidazione.",
+        overlayDeep: "Vista di contesto profondo: combina Fibo, MACD, ADX e divergenza stocastica per una lettura completa del singolo strumento.",
+        overlayNote: "Best practice: leggere prima la tesi nella dashboard, poi validare l'overlay sul grafico. Partire dal grafico fa spesso ignorare blocker di rischio o execution.",
+        panelTitle: "Pannello flottante / position sizer workstation",
+        panelBubble1: "Qui cambia la modalita ordine. Market, limit e stop sono workflow operativi separati.",
+        panelBubble2: "I runtime inputs permettono all'operatore di regolare rischio, lotti e moltiplicatori ATR durante la sessione.",
+        panelBubble3: "Blocco azioni: buy, sell, close, reverse, trail e auto. Questa area deve restare coerente con i permessi globali di execution.",
+        panelMarket: "Modalita market: per esecuzione manuale immediata con i valori rischio correnti e gating live.",
+        panelLimit: "Modalita limit: per ingressi scaglionati con scale prezzo, target visibili e logica di piazzamento basata su zone.",
+        panelWarning: "Importante: il pannello flottante e un'interfaccia operativa, non uno strumento per aggirare la governance. Se risk, news o decision bloccano il setup, l'azione manuale non dovrebbe sovrascrivere il sistema senza intenzione chiara.",
+        inputTitle: "Architettura input: cosa controllano i gruppi principali",
+        inputH1: "Gruppi 01 a 09",
+        inputP1: "Universe, motore MTF, logica display, alert, workflow chart, execution core, drawdown control e intelligenza adattiva. Questa e la base della piattaforma.",
+        inputH2: "Gruppi 10 a 18",
+        inputP2: "Profilo tester, universe dinamico, allocazione capitale, calibrazione broker, auto profile, survival engine, volume spike assist, frequency governor ed execution quality gate.",
+        inputH3: "Gruppi 19 a 26",
+        inputP3: "Validation, preview overlay, institutional signal intelligence, decision engine, open/close matrix, news, rischio portfolio e controlli pro trader.",
+        inputTip: "Workflow professionale: stabilizzare prima universe e runtime, poi validare i layer di segnale, poi abilitare execution, poi rifinire floating panel e hotkeys.",
+        supportTitle: "Checklist di prevenzione supporto",
+        supportH1: "Quando un trade non si apre",
+        supportH2: "Quando lo schermo sembra incoerente",
+        supportList1: "<li>Controllare se l'execution terminal mostra <code>blocked</code>, <code>wait</code> o <code>ready</code>.</li><li>Leggere la tab Execution per spread, slip, pending safety e motivi di blocco.</li><li>Leggere la tab Risk per budget, liquidita, allineamento e contesto di sessione.</li><li>Controllare la tab INST per verificare se la logica portfolio o correlazione indebolisce il rilascio.</li>",
+        supportList2: "<li>Verificare selected symbol e tab attiva.</li><li>Confrontare la visibilita degli overlay con i preview toggle e gli hotkey.</li><li>In caso di lentezza, controllare runtime, watchdog e recovery blocks.</li><li>Per problemi al floating panel, verificare gate, runtime diagnostics ed execution permissions.</li>",
+        supportNote: "La maggior parte dei ticket ricorrenti scompare quando gli utenti imparano a leggere prima dashboard, poi execution, poi risk e solo dopo i gruppi input piu profondi.",
+        refTitle: "Riferimento tecnico",
+        refBold: "Incluso:",
+        refP1: "il riferimento tecnico degli input per la build attiva del progetto.",
+        refP2: "Usa il manuale visivo per l'operativita e il riferimento tecnico per la ricerca precisa dei parametri.",
+        refBtn: "Apri riferimento input"
+      },
+      es: {
+        title: "CV QuantMarketScreenerPro Manual Multilingüe 2026-05-30",
+        brandText: "Manual operativo multilingüe con anotaciones visuales para dashboard, overlays del gráfico, panel flotante y arquitectura de inputs.",
+        langPrompt: "Selección de idioma",
+        navOverview: "Resumen",
+        navReading: "Lógica de lectura",
+        navDashboard: "Dashboard anotado",
+        navTabs: "Guía de pestañas",
+        navOverlays: "Guía de overlays",
+        navPanel: "Panel flotante",
+        navInputs: "Arquitectura de inputs",
+        navSupport: "Prevención de soporte",
+        navReference: "Referencia técnica",
+        eyebrow: "Institutional Operator Manual",
+        heroTitle: "Manual visual multilingüe para la build actual del proyecto",
+        heroP1: "Este manual está diseñado para reducir consultas de soporte. Explica qué hace cada área del dashboard, por qué un setup queda bloqueado o liberado y cómo la arquitectura de inputs se conecta con la interfaz en vivo.",
+        heroP2: "El contenido está alineado con la estructura actual de CV QuantMarketScreenerPro, el flujo activo de pestañas, los preview overlays, la floating execution workstation y la jerarquía institucional de inputs.",
+        stat1: "grupos principales de inputs en la arquitectura central",
+        stat2: "workspaces principales del dashboard explicados con imágenes",
+        stat3: "idiomas disponibles en el mismo manual",
+        stat4: "modelo visual orientado a reducir soporte",
+        readingTitle: "Cómo debe usarse este manual",
+        readingH1: "Primero leer la pantalla, luego los inputs",
+        readingP1: "La mayoría de los problemas de soporte nace de un flujo invertido. Los usuarios empiezan en la lista de inputs, pero el EA toma decisiones en vivo en el dashboard, el execution gate y las capas de portfolio.",
+        readingH2: "Cada pestaña responde a una pregunta distinta",
+        readingP2: "Signal explica la tesis. Execution explica la operabilidad. Risk explica el ajuste al presupuesto. Structure explica el contexto de precio. INST explica el impacto en portfolio.",
+        readingH3: "Usar los marcadores visuales",
+        readingP3: "Los globos y flechas resaltan las zonas críticas para soporte: lista de oportunidades, símbolo seleccionado, bloqueadores, estado de ejecución, overlays y controles manuales.",
+        dashTitle: "Dashboard anotado: la vista operativa principal",
+        dashBubble1: "Franja principal de comandos: botones de mercado, overlays, perfil de sesión y modo de workspace.",
+        dashBubble2: "Tabla de oportunidades: compara símbolos por señal, IQ, spread, MTF, motivos y prioridad.",
+        dashBubble3: "Símbolo seleccionado y fila de pestañas: todos los bloques inferiores pertenecen ahora solo a este instrumento.",
+        dashBubble4: "Execution terminal: veredicto final en vivo. Ready, wait o blocked importa más que cualquier puntuación aislada de arriba.",
+        dashCaption: "El dashboard debe leerse siempre de arriba abajo: universo, símbolo seleccionado, pestaña temática, veredicto de ejecución. Así se evitan supuestos falsos sobre trades no ejecutados.",
+        dashCallout1H: "Signal Quality",
+        dashCallout1P: "Mide si el setup está estructuralmente completo para mantenerse activo.",
+        dashCallout2H: "Decision Confidence",
+        dashCallout2P: "Muestra convicción direccional. Una convicción alta no es permiso si risk o execution bloquean el trade.",
+        dashCallout3H: "Execution State",
+        dashCallout3P: "El resultado práctico final. Si faltan trades, este bloque se revisa primero.",
+        tabsTitle: "Guía de pestañas: qué responde cada workspace",
+        tabSignal: "Pestaña Signal: responde “¿cuál es la tesis del trade?”. Muestra fase estructural, sesión, estado de volumen, impulsores positivos y bloqueadores exactos de la readiness.",
+        tabExecution: "Pestaña Execution: responde “¿por qué el trade está listo o no listo?”. Aclara fill quality, spread regime, pending safety y motivos de bloqueo.",
+        execBubble1: "Spread y slip pueden bloquear incluso un setup válido.",
+        tabRisk: "Pestaña Risk: responde “¿el setup todavía encaja en la envolvente de riesgo actual?”. Es el lugar correcto para oportunidades visualmente buenas pero bloqueadas.",
+        tabStructure: "Pestaña Structure: responde “¿cómo se relacionan precio, VWAP y niveles estructurales?”. Es el mapa de precio para confirmación discrecional.",
+        tabAnalytics: "Pestaña Analytics: responde “¿qué métrica ayuda o perjudica la puntuación total?”. Útil para tuning, no para ejecución ciega.",
+        tabAI: "Pestaña AI: responde “¿qué apoya o frena la capa adaptativa?”. Separa los bloqueadores centrales de la influencia adaptativa secundaria.",
+        tabGauge: "Pestaña Gauge: responde “¿cómo leen en conjunto los osciladores clásicos y las medias móviles?”. Útil para orientación rápida, nunca como regla autónoma de entrada.",
+        instBubble1: "Inteligencia de portfolio: revisar esta zona antes de habilitar auto ejecución amplia.",
+        instBubble2: "Correlación y diversificación explican por qué un buen símbolo puede seguir siendo débil desde el punto de vista estratégico.",
+        tabInst: "Pestaña INST: responde “¿cuál es el impacto en portfolio?”. Combina exposición, ranking de oportunidades, diversificación y contexto de portfolio del símbolo seleccionado.",
+        overlayTitle: "Guía de overlays: forecast, profile, zonas y contexto profundo",
+        overlayForecast: "Overlay Forecast: trayectoria proyectada para una idea de setup. Es una herramienta de escenario, no una ruta objetivo garantizada.",
+        overlayProfile: "Overlay Market Profile: identifica aceptación, value area y POC. Úsalo para juzgar balance, rechazo o terreno de ruptura.",
+        overlaySD: "Zonas de supply y demand: mapa visual de riesgo para entradas, retests, niveles de reacción y conciencia de invalidación.",
+        overlayDeep: "Vista de contexto profundo: combina Fibo, MACD, ADX y divergencia estocástica para una lectura completa de un solo instrumento.",
+        overlayNote: "Mejor práctica: leer primero la tesis del dashboard y luego validar el overlay del gráfico. Empezar por el gráfico suele ignorar bloqueadores de riesgo o ejecución.",
+        panelTitle: "Panel flotante / position sizer workstation",
+        panelBubble1: "Aquí cambia el modo de orden. Market, limit y stop son flujos operativos distintos.",
+        panelBubble2: "Los runtime inputs permiten al operador ajustar riesgo, lotes y multiplicadores ATR durante la sesión.",
+        panelBubble3: "Bloque de acciones: buy, sell, close, reverse, trail y auto. Esta zona debe mantenerse coherente con los permisos globales de ejecución.",
+        panelMarket: "Modo market: para ejecución manual inmediata con los inputs de riesgo actuales y gating en vivo.",
+        panelLimit: "Modo limit: para entradas escalonadas con escalas de precio visibles, niveles objetivo y lógica de colocación basada en zonas.",
+        panelWarning: "Importante: el panel flotante es una interfaz operativa, no una herramienta para saltarse la gobernanza. Si risk, news o decision bloquean el setup, la acción manual no debería anular el sistema sin intención clara.",
+        inputTitle: "Arquitectura de inputs: qué controlan los grupos principales",
+        inputH1: "Grupos 01 a 09",
+        inputP1: "Universe, motor MTF, lógica de display, alertas, workflow del gráfico, execution core, control de drawdown e inteligencia adaptativa. Esa es la base de la plataforma.",
+        inputH2: "Grupos 10 a 18",
+        inputP2: "Perfil tester, universo dinámico, asignación de capital, calibración del broker, auto profile, survival engine, volume spike assist, frequency governor y execution quality gate.",
+        inputH3: "Grupos 19 a 26",
+        inputP3: "Validation, preview overlays, institutional signal intelligence, decision engine, open/close matrix, news, riesgo de portfolio y controles pro trader.",
+        inputTip: "Flujo profesional: estabilizar primero universo y runtime, luego validar las capas de señal, luego habilitar execution y después refinar panel flotante y hotkeys.",
+        supportTitle: "Checklist de prevención de soporte",
+        supportH1: "Cuando un trade no se abrió",
+        supportH2: "Cuando la pantalla parece inconsistente",
+        supportList1: "<li>Comprobar si el execution terminal indica <code>blocked</code>, <code>wait</code> o <code>ready</code>.</li><li>Leer la pestaña Execution para spread, slip, pending safety y motivos de bloqueo.</li><li>Leer la pestaña Risk para presupuesto, liquidez, alineación y contexto de sesión.</li><li>Revisar la pestaña INST para ver si la lógica de portfolio o correlación debilita la liberación.</li>",
+        supportList2: "<li>Verificar símbolo seleccionado y pestaña activa.</li><li>Comparar la visibilidad de overlays con los preview toggles y hotkeys.</li><li>Si hay lentitud, revisar runtime, watchdog y recovery blocks.</li><li>Para problemas con el panel flotante, validar gate, runtime diagnostics y execution permissions.</li>",
+        supportNote: "La mayoría de los tickets recurrentes desaparece cuando los usuarios aprenden a leer primero dashboard, luego execution, luego risk y solo después los grupos profundos de inputs.",
+        refTitle: "Referencia técnica",
+        refBold: "Incluido:",
+        refP1: "la referencia técnica de inputs para la build activa del proyecto.",
+        refP2: "Usa el manual visual para la operativa y la referencia técnica para buscar parámetros exactos.",
+        refBtn: "Abrir referencia de inputs"
+      }
+    };
+
+    function enhanceVisualCards(lang){
+      const kickerMap = {
+        de: {
+          dashboard: "Zentrale Arbeitsansicht",
+          tabs: "Workspace-Tab",
+          overlays: "Chart-Overlay",
+          panel: "Manuelle Ausfuehrung"
+        },
+        en: {
+          dashboard: "Main operating view",
+          tabs: "Workspace tab",
+          overlays: "Chart overlay",
+          panel: "Manual execution"
+        },
+        it: {
+          dashboard: "Vista operativa principale",
+          tabs: "Workspace tab",
+          overlays: "Overlay grafico",
+          panel: "Esecuzione manuale"
+        },
+        es: {
+          dashboard: "Vista operativa principal",
+          tabs: "Pestaña de workspace",
+          overlays: "Overlay de gráfico",
+          panel: "Ejecución manual"
+        }
+      };
+
+      const dict = kickerMap[lang] || kickerMap.de;
+      document.querySelectorAll("figure.shot").forEach((figure) => {
+        const img = figure.querySelector("img");
+        const caption = figure.querySelector(".shot-desc");
+        if (!img || !caption) return;
+
+        const group = figure.getAttribute("data-shot-group") || "tabs";
+        const kicker = dict[group] || dict.tabs;
+
+        let title = caption.textContent.trim();
+        if (title.includes(":")) title = title.split(":")[0].trim();
+        if (title.length < 4) title = img.alt.trim();
+
+        let head = figure.querySelector(".shot-head");
+        if (!head) {
+          head = document.createElement("div");
+          head.className = "shot-head";
+          head.innerHTML = "<span class='shot-kicker'></span><h4 class='shot-title'></h4>";
+          figure.insertBefore(head, figure.firstChild);
+        }
+
+        head.querySelector(".shot-kicker").textContent = kicker;
+        head.querySelector(".shot-title").textContent = title;
+      });
+    }
+
+    function applyLanguage(lang){
+      const dict = translations[lang] || translations.de;
+      document.documentElement.lang = lang;
+      document.title = dict.title;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if(dict[key] !== undefined) el.textContent = dict[key];
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if(dict[key] !== undefined) el.innerHTML = dict[key];
+      });
+      document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang-btn') === lang);
+      });
+      enhanceVisualCards(lang);
+      localStorage.setItem('qms_manual_lang', lang);
+    }
+
+    function normalizeDocText(text){
+      return String(text || "")
+        .replace(/â€œ|â€/g, '"')
+        .replace(/â€˜|â€™/g, "'")
+        .replace(/Ã±/g, "ñ")
+        .replace(/Ã¡/g, "á")
+        .replace(/Ã©/g, "é")
+        .replace(/Ã­/g, "í")
+        .replace(/Ã³/g, "ó")
+        .replace(/Ãº/g, "ú");
+    }
+
+    function syncReferenceLink(lang){
+      document.querySelectorAll('[data-ref-link]').forEach((link) => {
+        link.setAttribute('href', 'CV_QuantMarketScreenerPro_InputReference_2026-05-30.html?lang=' + lang + '&v=docsfix4');
+      });
+    }
+
+    enhanceVisualCards = function(lang, dict){
+      const kickerMap = {
+        de: { dashboard: "Zentrale Arbeitsansicht", tabs: "Workspace-Tab", overlays: "Chart-Overlay", panel: "Manuelle Ausfuehrung" },
+        en: { dashboard: "Main operating view", tabs: "Workspace tab", overlays: "Chart overlay", panel: "Manual execution" },
+        it: { dashboard: "Vista operativa principale", tabs: "Scheda workspace", overlays: "Overlay grafico", panel: "Esecuzione manuale" },
+        es: { dashboard: "Vista operativa principal", tabs: "Pestaña workspace", overlays: "Overlay de gráfico", panel: "Ejecución manual" }
+      };
+      const titleMap = {
+        de: { "dashboard-main": "Dashboard-Gesamtansicht", "tab-signal": "Signal-Tab", "tab-execution": "Execution-Tab", "tab-risk": "Risk-Tab", "tab-structure": "Structure-Tab", "tab-analytics": "Analytics-Tab", "tab-ai": "AI-Tab", "tab-gauge": "Gauge-Tab", "tab-inst": "INST-Tab", "overlay-forecast": "Forecast-Overlay", "overlay-profile": "Market-Profile-Overlay", "overlay-sd": "Supply-and-Demand-Zonen", "overlay-deep": "Tiefenkontext-Ansicht", "panel-market": "Market-Modus", "panel-limit": "Limit-Modus" },
+        en: { "dashboard-main": "Dashboard Overview", "tab-signal": "Signal Tab", "tab-execution": "Execution Tab", "tab-risk": "Risk Tab", "tab-structure": "Structure Tab", "tab-analytics": "Analytics Tab", "tab-ai": "AI Tab", "tab-gauge": "Gauge Tab", "tab-inst": "INST Tab", "overlay-forecast": "Forecast Overlay", "overlay-profile": "Market Profile Overlay", "overlay-sd": "Supply and Demand Zones", "overlay-deep": "Deep Context View", "panel-market": "Market Mode", "panel-limit": "Limit Mode" },
+        it: { "dashboard-main": "Panoramica dashboard", "tab-signal": "Scheda Signal", "tab-execution": "Scheda Execution", "tab-risk": "Scheda Risk", "tab-structure": "Scheda Structure", "tab-analytics": "Scheda Analytics", "tab-ai": "Scheda AI", "tab-gauge": "Scheda Gauge", "tab-inst": "Scheda INST", "overlay-forecast": "Overlay Forecast", "overlay-profile": "Overlay Market Profile", "overlay-sd": "Zone Supply and Demand", "overlay-deep": "Vista contesto profondo", "panel-market": "Modalità market", "panel-limit": "Modalità limit" },
+        es: { "dashboard-main": "Vista general del dashboard", "tab-signal": "Pestaña Signal", "tab-execution": "Pestaña Execution", "tab-risk": "Pestaña Risk", "tab-structure": "Pestaña Structure", "tab-analytics": "Pestaña Analytics", "tab-ai": "Pestaña AI", "tab-gauge": "Pestaña Gauge", "tab-inst": "Pestaña INST", "overlay-forecast": "Overlay Forecast", "overlay-profile": "Overlay Market Profile", "overlay-sd": "Zonas de supply and demand", "overlay-deep": "Vista de contexto profundo", "panel-market": "Modo market", "panel-limit": "Modo limit" }
+      };
+      const descKeyMap = {
+        "dashboard-main": "dashCaption", "tab-signal": "tabSignal", "tab-execution": "tabExecution", "tab-risk": "tabRisk", "tab-structure": "tabStructure",
+        "tab-analytics": "tabAnalytics", "tab-ai": "tabAI", "tab-gauge": "tabGauge", "tab-inst": "tabInst", "overlay-forecast": "overlayForecast",
+        "overlay-profile": "overlayProfile", "overlay-sd": "overlaySD", "overlay-deep": "overlayDeep", "panel-market": "panelMarket", "panel-limit": "panelLimit"
+      };
+
+      const activeDict = dict || (translations[lang] || translations.de);
+      const kickerDict = kickerMap[lang] || kickerMap.de;
+      const titles = titleMap[lang] || titleMap.de;
+      document.querySelectorAll("figure.shot").forEach((figure) => {
+        const img = figure.querySelector("img");
+        const caption = figure.querySelector(".shot-desc");
+        if (!img || !caption) return;
+        const group = figure.getAttribute("data-shot-group") || "tabs";
+        const visualId = figure.getAttribute("data-visual-id") || "";
+        const kicker = kickerDict[group] || kickerDict.tabs;
+        const title = titles[visualId] || normalizeDocText(img.alt.trim());
+        const descKey = descKeyMap[visualId];
+        const descText = descKey && activeDict[descKey] ? activeDict[descKey] : caption.textContent.trim();
+
+        let head = figure.querySelector(".shot-head");
+        if (!head) {
+          head = document.createElement("div");
+          head.className = "shot-head";
+          head.innerHTML = "<span class='shot-kicker'></span><h4 class='shot-title'></h4>";
+          figure.insertBefore(head, figure.firstChild);
+        }
+
+        head.querySelector(".shot-kicker").textContent = normalizeDocText(kicker);
+        head.querySelector(".shot-title").textContent = normalizeDocText(title);
+        caption.textContent = normalizeDocText(descText);
+        img.alt = normalizeDocText(title);
+      });
+    };
+
+    applyLanguage = function(lang){
+      const dict = translations[lang] || translations.de;
+      document.documentElement.lang = lang;
+      document.title = dict.title;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if(dict[key] !== undefined) el.textContent = dict[key];
+      });
+      document.querySelectorAll('[data-i18n-html]').forEach(el => {
+        const key = el.getAttribute('data-i18n-html');
+        if(dict[key] !== undefined) el.innerHTML = dict[key];
+      });
+      document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang-btn') === lang);
+      });
+      enhanceVisualCards(lang, dict);
+      syncReferenceLink(lang);
+      localStorage.setItem('qms_manual_lang', lang);
+    };
+
+    const urlLang = new URLSearchParams(window.location.search).get('lang');
+    const storedLang = urlLang || localStorage.getItem('qms_manual_lang') || 'de';
+    applyLanguage(storedLang);
+    document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+      btn.addEventListener('click', () => applyLanguage(btn.getAttribute('data-lang-btn')));
+    });
+  </script>
+</body>
+</html>
