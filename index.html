@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CV QuantMarketScreenerPro Manual 2026-06-06</title>
+  <style>
+    :root{
+      --bg:#061019;
+      --bg-2:#091724;
+      --panel:#0f2133;
+      --panel-2:#13273a;
+      --line:rgba(255,255,255,.08);
+      --text:#edf3fa;
+      --muted:#9db1c4;
+      --accent:#ffab4c;
+      --accent-2:#65cfff;
+      --good:#46d48b;
+      --warn:#ffd166;
+      --bad:#ff5f6d;
+      --critical:#ff374f;
+      --shadow:0 26px 60px rgba(0,0,0,.34);
+      --radius:26px;
+      --sidebar:320px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font:15px/1.68 "Segoe UI",Tahoma,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255,171,76,.12), transparent 28%),
+        radial-gradient(circle at 90% 10%, rgba(101,207,255,.10), transparent 24%),
+        linear-gradient(180deg,#050d15 0%,#07111b 100%);
+    }
+    a{color:#ffd7a7}
+    .layout{
+      display:grid;
+      grid-template-columns:var(--sidebar) minmax(0,1fr);
+      min-height:100vh;
+    }
+    .sidebar{
+      position:sticky;
+      top:0;
+      height:100vh;
+      overflow:auto;
+      padding:24px 20px 36px;
+      background:rgba(5,12,20,.94);
+      border-right:1px solid var(--line);
+      backdrop-filter:blur(18px);
+      z-index:20;
+    }
+    .side-card{
+      background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:20px;
+      box-shadow:var(--shadow);
+      margin-bottom:18px;
+      overflow:hidden;
+    }
+    .brand h1{
+      margin:0 0 10px;
+      font-size:clamp(18px,2vw,24px);
+      line-height:1.12;
+      max-width:100%;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+      hyphens:auto;
+      text-wrap:balance;
+    }
+    .brand p,
+    .lang-box p,
+    .nav-label{color:var(--muted);margin:0}
+    .lang-buttons{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin-top:14px;
+    }
+    .lang-buttons button{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border-radius:14px;
+      padding:11px 12px;
+      cursor:pointer;
+      font-weight:700;
+      transition:.18s ease;
+    }
+    .lang-buttons button.active{
+      background:linear-gradient(135deg,var(--accent),#ffcf7a);
+      color:#14202d;
+      border-color:transparent;
+    }
+    .sidebar nav{
+      margin-top:8px;
+    }
+    .sidebar nav a{
+      display:block;
+      padding:9px 12px;
+      color:var(--muted);
+      text-decoration:none;
+      border-radius:12px;
+      transition:.18s ease;
+      margin:2px 0;
+    }
+    .sidebar nav a:hover{
+      color:var(--text);
+      background:rgba(255,255,255,.05);
+      transform:translateX(3px);
+    }
+    .main{
+      padding:28px 34px 72px;
+    }
+    .hero{
+      position:relative;
+      overflow:hidden;
+      background:
+        linear-gradient(180deg,rgba(15,33,51,.96),rgba(8,20,31,.98)),
+        linear-gradient(140deg,rgba(255,171,76,.14),transparent 30%),
+        linear-gradient(220deg,rgba(101,207,255,.12),transparent 26%);
+      border:1px solid var(--line);
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      padding:34px;
+      min-height:430px;
+      margin-bottom:22px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:22px;
+      isolation:isolate;
+    }
+    .hero-copy,.hero-meta{position:relative;z-index:1}
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      color:var(--accent-2);
+      border:1px solid rgba(255,255,255,.08);
+      font-weight:700;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      font-size:12px;
+    }
+    .hero h2{
+      font-size:46px;
+      line-height:1.05;
+      margin:16px 0 14px;
+      max-width:760px;
+    }
+    .hero p{
+      margin:0 0 14px;
+      color:#d7e2ee;
+      max-width:760px;
+      font-size:16px;
+    }
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:20px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:0 18px;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:800;
+      border:1px solid transparent;
+    }
+    .btn.primary{
+      color:#111a24;
+      background:linear-gradient(135deg,var(--accent),#ffd28b);
+    }
+    .btn.secondary{
+      color:var(--text);
+      background:rgba(255,255,255,.05);
+      border-color:var(--line);
+    }
+    .hero-meta{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      align-content:start;
+    }
+    .metric-card,
+    .panel,
+    .visual-card{
+      background:linear-gradient(180deg,rgba(18,38,57,.94),rgba(10,21,31,.98));
+      border:1px solid var(--line);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+    }
+    .metric-card{
+      padding:18px;
+      min-height:124px;
+    }
+    .metric-card .kicker{
+      color:var(--muted);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      margin-bottom:10px;
+    }
+    .metric-card strong{
+      display:block;
+      font-size:30px;
+      margin-bottom:8px;
+    }
+    .metric-card p{
+      color:#d8e4ef;
+      margin:0;
+      font-size:13px;
+    }
+    .metric-card.critical strong,
+    .metric-card.critical .kicker{color:#ffd3d9}
+    .metric-card.critical{
+      border-color:rgba(255,95,109,.40);
+      background:linear-gradient(180deg,rgba(61,18,29,.92),rgba(24,11,17,.98));
+    }
+    .section{
+      margin-bottom:24px;
+      padding:28px;
+    }
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:18px;
+      margin-bottom:18px;
+    }
+    .section-head h3{
+      margin:0;
+      font-size:32px;
+      line-height:1.08;
+    }
+    .section-head p{
+      margin:0;
+      color:var(--muted);
+      max-width:740px;
+    }
+    .landing-grid{
+      display:grid;
+      grid-template-columns:repeat(12,minmax(0,1fr));
+      gap:16px;
+    }
+    .highlight{
+      grid-column:span 4;
+      padding:18px;
+      border-radius:20px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+    }
+    .highlight h4{
+      margin:0 0 10px;
+      font-size:18px;
+    }
+    .highlight p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .highlight.critical{
+      border-color:rgba(255,55,79,.48);
+      background:linear-gradient(180deg,rgba(56,12,20,.92),rgba(18,10,13,.98));
+    }
+    .highlight.critical h4{
+      color:#ffd8dd;
+    }
+    .process{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:14px;
+    }
+    .step{
+      padding:18px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+    }
+    .step .num{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      background:rgba(255,171,76,.14);
+      color:#ffd6a3;
+      font-weight:800;
+      margin-bottom:12px;
+    }
+    .step h4{margin:0 0 8px;font-size:18px}
+    .step p{margin:0;color:var(--muted)}
+    .visual-stack{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:18px;
+    }
+    .visual-card{
+      overflow:hidden;
+    }
+    .visual-header{
+      padding:20px 22px 12px;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:16px;
+    }
+    .visual-header .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      color:var(--accent-2);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-weight:800;
+    }
+    .visual-header .risk{
+      color:#ffd4da;
+      background:rgba(255,55,79,.14);
+      border:1px solid rgba(255,55,79,.34);
+    }
+    .visual-header h4{
+      margin:10px 0 0;
+      font-size:26px;
+      line-height:1.12;
+    }
+    .visual-header p{
+      margin:8px 0 0;
+      color:var(--muted);
+      max-width:820px;
+    }
+    .visual-body{
+      padding:18px 22px 22px;
+      display:grid;
+      grid-template-columns:1.12fr .88fr;
+      gap:18px;
+      align-items:start;
+    }
+    .visual-image{
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background:#08131d;
+    }
+    .visual-image img{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+    .explain-box{
+      display:grid;
+      gap:14px;
+    }
+    .explain-card{
+      padding:16px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+    }
+    .explain-card h5{
+      margin:0 0 8px;
+      font-size:17px;
+    }
+    .explain-card p{
+      margin:0;
+      color:var(--muted);
+    }
+    .critical-note{
+      padding:16px;
+      border-radius:18px;
+      border:1px solid rgba(255,55,79,.38);
+      background:linear-gradient(180deg,rgba(52,11,19,.95),rgba(20,10,14,.99));
+    }
+    .critical-note h5{
+      margin:0 0 8px;
+      color:#ffdbe0;
+      font-size:17px;
+    }
+    .critical-note p{
+      margin:0;
+      color:#ffd6da;
+    }
+    .pill-list{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:12px;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--line);
+      color:#dce8f4;
+      font-size:13px;
+      font-weight:700;
+    }
+    .pill.critical{
+      background:rgba(255,55,79,.12);
+      border-color:rgba(255,55,79,.36);
+      color:#ffd7dc;
+    }
+    .check-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+    }
+    .check{
+      padding:16px;
+      border-radius:18px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+    }
+    .check h4{margin:0 0 8px;font-size:18px}
+    .check ul{margin:0;padding-left:18px;color:var(--muted)}
+    .install-stack{
+      display:grid;
+      gap:18px;
+    }
+    .install-card{
+      padding:20px;
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(18,35,54,.96),rgba(10,21,31,.98));
+    }
+    .install-card h4{
+      margin:0 0 8px;
+      font-size:24px;
+      line-height:1.14;
+    }
+    .install-card > p{
+      margin:0 0 16px;
+      color:var(--muted);
+    }
+    .install-layout{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:18px;
+      align-items:start;
+    }
+    .install-visual{
+      border-radius:18px;
+      border:1px solid rgba(101,207,255,.18);
+      background:linear-gradient(180deg,rgba(7,17,27,.98),rgba(11,24,37,.98));
+      overflow:hidden;
+    }
+    .install-window-bar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border-bottom:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:#dce8f4;
+      font-size:13px;
+      font-weight:700;
+    }
+    .install-window-bar span:last-child{
+      color:var(--accent-2);
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+    .path-box{
+      margin:14px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,171,76,.22);
+      background:rgba(255,171,76,.08);
+      color:#ffe2bf;
+      font-family:Consolas, "Courier New", monospace;
+      font-size:13px;
+      overflow-wrap:anywhere;
+    }
+    .folder-tree{
+      list-style:none;
+      margin:0;
+      padding:0 14px 14px;
+      display:grid;
+      gap:8px;
+      color:#d7e3ee;
+      font-size:14px;
+    }
+    .folder-tree li{
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.05);
+    }
+    .folder-tree li strong{
+      color:#ffd6a3;
+    }
+    .install-copy{
+      display:grid;
+      gap:12px;
+    }
+    .install-steps{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      display:grid;
+      gap:8px;
+    }
+    .install-note{
+      padding:14px 16px;
+      border-radius:16px;
+      border:1px solid rgba(255,55,79,.34);
+      background:linear-gradient(180deg,rgba(52,11,19,.95),rgba(20,10,14,.99));
+      color:#ffd6da;
+    }
+    .install-note strong{
+      display:block;
+      margin-bottom:6px;
+      color:#ffe3e7;
+    }
+    .install-link{
+      display:inline-flex;
+      align-items:center;
+      width:max-content;
+      min-height:42px;
+      padding:0 16px;
+      border-radius:12px;
+      text-decoration:none;
+      font-weight:800;
+      color:#111a24;
+      background:linear-gradient(135deg,var(--accent),#ffd28b);
+    }
+    .cta{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding:18px 20px;
+      border-radius:20px;
+      border:1px solid rgba(101,207,255,.22);
+      background:linear-gradient(180deg,rgba(18,35,54,.96),rgba(10,21,31,.98));
+    }
+    .cta p{margin:0;color:var(--muted)}
+    .footer-note{
+      color:var(--muted);
+      text-align:center;
+      padding:18px 0 0;
+      font-size:13px;
+    }
+    @media (max-width:1280px){
+      .hero,.visual-body{grid-template-columns:1fr}
+      .highlight{grid-column:span 6}
+      .process{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .check-grid{grid-template-columns:1fr}
+      .install-layout{grid-template-columns:1fr}
+    }
+    @media (max-width:980px){
+      .layout{grid-template-columns:1fr}
+      .sidebar{
+        position:relative;
+        height:auto;
+        border-right:0;
+        border-bottom:1px solid var(--line);
+      }
+      .main{padding:22px 18px 54px}
+      .hero h2{font-size:34px}
+      .hero-meta{grid-template-columns:1fr}
+      .highlight{grid-column:span 12}
+      .process{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="side-card brand">
+        <h1>CV QuantMarketScreenerPro</h1>
+        <p id="sidebarLead">Mehrsprachige Bedienungsanleitung fuer Dashboard, Overlays, Floating Panel und Einstellungen.</p>
+      </div>
+      <div class="side-card lang-box">
+        <p id="langLabel">Sprachauswahl</p>
+        <div class="lang-buttons">
+          <button type="button" data-lang-btn="de">Deutsch</button>
+          <button type="button" data-lang-btn="en">English</button>
+          <button type="button" data-lang-btn="it">Italiano</button>
+          <button type="button" data-lang-btn="es">Español</button>
+        </div>
+      </div>
+      <div class="nav-label" id="navLabel">Navigation</div>
+      <nav>
+        <a href="#hero" data-i18n="navHero">Start</a>
+        <a href="#why" data-i18n="navWhy">Dokumentationsprinzipien</a>
+        <a href="#workflow" data-i18n="navWorkflow">Empfohlene Reihenfolge</a>
+        <a href="#dashboard" data-i18n="navDashboard">Dashboard & Tabs</a>
+        <a href="#critical" data-i18n="navCritical">Kritische Einstellungen</a>
+        <a href="#overlays" data-i18n="navOverlays">Chart-Overlays</a>
+        <a href="#panel" data-i18n="navPanel">Floating Panel</a>
+        <a href="#inputs" data-i18n="navInputs">Input-Referenz</a>
+        <a href="#pro" data-i18n="navPro">Installation</a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <section class="hero" id="hero">
+        <div class="hero-copy">
+          <span class="eyebrow" id="heroEyebrow">Bedienungsanleitung fuer professionelle Anwender</span>
+          <h2 id="heroTitle">Eine echte Bedienungsanleitung fuer einen echten Multi-Asset-Screener</h2>
+          <p id="heroP1">Diese Version fuehrt klar durch die wichtigsten Bereiche des Screeners. Bilder, Erklaerungen und Hinweise gehoeren jeweils direkt zusammen.</p>
+          <p id="heroP2">Wichtige Einstellungen werden deutlich markiert, die Input-Referenz folgt der gewaehlten Sprache und die gesamte Anleitung ist auf praktische Bedienung ausgerichtet.</p>
+          <div class="hero-actions">
+            <a class="btn primary" id="manualRefLink" data-i18n="manualRefCta" href="CV_QuantMarketScreenerPro_InputReference_2026-05-30.html?lang=de">Zur Input-Referenz</a>
+            <a class="btn secondary" href="#critical" data-i18n="criticalCta">Kritische Einstellungen ansehen</a>
+          </div>
+        </div>
+        <div class="hero-meta">
+          <div class="metric-card">
+            <div class="kicker" id="metric1Kicker">Modulabdeckung</div>
+            <strong id="metric1Value">9 Tabs + 4 Overlays</strong>
+            <p id="metric1Text">Dashboard, Overlays und Handelsbereiche werden als klar getrennte Arbeitsbereiche erklaert statt nur als lose Bildersammlung.</p>
+          </div>
+          <div class="metric-card critical">
+            <div class="kicker" id="metric2Kicker">Support-Risiko</div>
+            <strong id="metric2Value">Kritische Inputs rot</strong>
+            <p id="metric2Text">Einstellungen, die Auto-Handel, Risiko, News-Filter oder Test-Ergebnisse stark beeinflussen, werden auffaellig und eindeutig markiert.</p>
+          </div>
+          <div class="metric-card">
+            <div class="kicker" id="metric3Kicker">Sprachsynchron</div>
+            <strong id="metric3Value">DE / EN / IT / ES</strong>
+            <p id="metric3Text">Manual und Input-Referenz folgen derselben gewaehlten Sprache und behalten diese ueber Links und Reloads hinweg.</p>
+          </div>
+            <div class="metric-card">
+              <div class="kicker" id="metric4Kicker">Anwenderfokus</div>
+              <strong id="metric4Value">Klar und direkt</strong>
+              <p id="metric4Text">Die Anleitung konzentriert sich auf Bedienung, Vorbereitung und praktische Nutzung statt auf technische Nebenthemen.</p>
+            </div>
+        </div>
+      </section>
+
+      <section class="panel section" id="why">
+        <div class="section-head">
+          <div>
+            <h3 id="whyTitle">Dokumentationsprinzipien</h3>
+            <p id="whyText">Diese Bedienungsanleitung fuehrt Schritt fuer Schritt durch Anzeige, Bewertung und Ausfuehrung. So werden Bedienfehler vermieden und typische Rueckfragen schon vorab beantwortet.</p>
+          </div>
+        </div>
+        <div class="landing-grid">
+          <article class="highlight">
+            <h4 id="whyH1">Echte Bedienlogik statt Screenshot-Sammlung</h4>
+            <p id="whyP1">Jede Bildkarte erklaert nicht nur was sichtbar ist, sondern welche Frage der jeweilige Bereich beantwortet und wann der Nutzer dort hingehen soll.</p>
+          </article>
+          <article class="highlight critical">
+            <h4 id="whyH2">Kritische Einstellungen sind markiert</h4>
+            <p id="whyP2">Auto-Execution, News-Gates, Drawdown-Limits, MinScore und Pending-/Stop-Logik muessen optisch als risikorelevant erkennbar sein.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel section" id="workflow">
+        <div class="section-head">
+          <div>
+            <h3 id="workflowTitle">Empfohlene Reihenfolge: so arbeitest du mit dem Screener</h3>
+            <p id="workflowText">Am einfachsten ist es, wenn du immer erst im Hauptfenster beginnst und erst danach in Tabs, Overlays und den Handelsbereich wechselst. So bleibt jede Entscheidung nachvollziehbar.</p>
+          </div>
+        </div>
+        <div class="process">
+          <article class="step">
+            <div class="num">1</div>
+            <h4 id="step1H">Opportunity finden</h4>
+            <p id="step1P">Im Haupttable zuerst Symbol, Signal, IQ, Spread, MTF und Reason-Stack lesen. Nur hier entsteht die erste Priorisierung.</p>
+          </article>
+          <article class="step">
+            <div class="num">2</div>
+            <h4 id="step2H">Tab-Frage beantworten</h4>
+            <p id="step2P">Jeder Tab beantwortet eine andere Frage. Deshalb solltest du nicht zwischen den Ansichten springen, sondern gezielt die passende Information lesen.</p>
+          </article>
+          <article class="step">
+            <div class="num">3</div>
+            <h4 id="step3H">Overlay verifizieren</h4>
+            <p id="step3P">Erst danach Forecast, Market Profile, Supply/Demand oder Tiefenkontext verwenden. Overlays bestaetigen die These, sie erzeugen sie nicht.</p>
+          </article>
+          <article class="step">
+            <div class="num">4</div>
+            <h4 id="step4H">Execution diszipliniert ausfuehren</h4>
+            <p id="step4P">Das Floating Panel ist fuer die direkte Bedienung gedacht. Wenn Risiko, News-Filter oder andere Schutzregeln gegen einen Trade sprechen, sollte kein Trade eroeffnet werden.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel section" id="dashboard">
+        <div class="section-head">
+          <div>
+            <h3 id="dashboardTitle">Dashboard und Tabs: jeder Bereich hat eine klare Aufgabe</h3>
+            <p id="dashboardText">Die folgenden Karten zeigen dir fuer jeden sichtbaren Bereich, wofuer er gedacht ist, worauf du achten solltest und welche Fehlinterpretationen du vermeiden solltest.</p>
+          </div>
+        </div>
+        <div class="visual-stack" id="dashboardCards"></div>
+      </section>
+
+      <section class="panel section" id="critical">
+        <div class="section-head">
+          <div>
+            <h3 id="criticalTitle">Kritische Einstellungen und Stellen</h3>
+          </div>
+        </div>
+        <div class="check-grid" id="criticalGrid"></div>
+        <div class="pill-list" id="criticalPills"></div>
+      </section>
+
+      <section class="panel section" id="overlays">
+        <div class="section-head">
+          <div>
+            <h3 id="overlayTitle">Chart-Overlays: Kontext, nicht Showeffekt</h3>
+            <p id="overlayText">Overlays sind Zusatzinformationen. Jedes Overlay sollte dir klar zeigen, wofuer es gedacht ist und wann du es besser nicht ueberbewertest.</p>
+          </div>
+        </div>
+        <div class="visual-stack" id="overlayCards"></div>
+      </section>
+
+      <section class="panel section" id="panel">
+        <div class="section-head">
+          <div>
+            <h3 id="panelTitle">Floating Panel / Positionsgroesse</h3>
+            <p id="panelText">Dieser Bereich ist fuer die direkte Eingabe gedacht. Hier geht es um Orderart, Positionsgroesse, Stop-Loss, Take-Profit und sauberes manuelles Arbeiten.</p>
+          </div>
+        </div>
+        <div class="visual-stack" id="panelCards"></div>
+      </section>
+
+      <section class="panel section" id="inputs">
+        <div class="section-head">
+          <div>
+            <h3 id="inputsTitle">Input-Referenz</h3>
+            <p id="inputsText">Die Input-Referenz erklaert nicht nur den Namen eines Parameters, sondern vor allem seine Wirkung. Besonders wichtige Einstellungen werden deutlich markiert.</p>
+          </div>
+        </div>
+        <div class="cta">
+          <div>
+            <strong id="inputsCtaTitle">Input-Referenz in derselben Sprache oeffnen</strong>
+            <p id="inputsCtaText">Die Referenz folgt automatisch der aktuellen Sprachwahl und passt damit direkt zur geoeffneten Anleitung.</p>
+          </div>
+          <a class="btn primary" id="inputReferenceLink" data-i18n="inputReferenceCta" href="CV_QuantMarketScreenerPro_InputReference_2026-05-30.html?lang=de">Input-Referenz</a>
+        </div>
+      </section>
+
+      <section class="panel section" id="pro">
+        <div class="section-head">
+          <div>
+          <h3 id="proTitle">Installation und Vorbereitung</h3>
+          <p id="proText">Bevor der Screener wie im Video arbeitet, muessen die benoetigten Zusatzdateien in den richtigen MetaTrader-Ordnern liegen. Die folgenden Anleitungen zeigen dir die Ordnerstruktur und die noetigen Schritte.</p>
+          </div>
+        </div>
+        <div class="install-stack" id="proGrid"></div>
+      </section>
+
+      <p class="footer-note" id="footerNote">CV QuantMarketScreenerPro Manual 2026-06-06. Landingpage-Version mit sprachsynchroner Struktur und klar beschriebenen Arbeitsbereichen.</p>
+    </main>
+  </div>
+
+  <script>
+    const LANGS = ["de","en","it","es"];
+    const t = {
+      de: {
+        sidebarLead: "Mehrsprachige Bedienungsanleitung fuer Dashboard, Overlays, Floating Panel und Einstellungen.",
+        langLabel: "Sprachauswahl",
+        navLabel: "Navigation",
+        navHero: "Start",
+        navWhy: "Dokumentationsprinzipien",
+        navWorkflow: "Operator-Workflow",
+        navDashboard: "Dashboard & Tabs",
+        navCritical: "Kritische Einstellungen",
+        navOverlays: "Chart-Overlays",
+        navPanel: "Floating Panel",
+        navInputs: "Input-Referenz",
+        navPro: "Installation",
+        heroEyebrow: "Bedienungsanleitung fuer professionelle Anwender",
+        heroTitle: "Eine echte Bedienungsanleitung fuer einen echten Multi-Asset-Screener",
+        heroP1: "Diese Version fuehrt klar durch die wichtigsten Bereiche des Screeners. Bilder, Erklaerungen und Hinweise gehoeren jeweils direkt zusammen.",
+        heroP2: "Wichtige Einstellungen werden deutlich markiert, die Input-Referenz folgt der gewaehlten Sprache und die gesamte Anleitung ist auf praktische Bedienung ausgerichtet.",
+        manualRefCta: "Zur Input-Referenz",
+        criticalCta: "Kritische Einstellungen ansehen",
+        metric1Kicker: "Modulabdeckung",
+        metric1Value: "9 Tabs + 4 Overlays",
+        metric1Text: "Dashboard, Overlays und Handelsbereiche werden als klar getrennte Arbeitsbereiche erklaert statt nur als lose Bildersammlung.",
+        metric2Kicker: "Support-Risiko",
+        metric2Value: "Kritische Inputs rot",
+        metric2Text: "Einstellungen, die Auto-Handel, Risiko, News-Filter oder Test-Ergebnisse stark beeinflussen, werden auffaellig und eindeutig markiert.",
+        metric3Kicker: "Sprachsynchron",
+        metric3Value: "DE / EN / IT / ES",
+        metric3Text: "Anleitung und Input-Referenz folgen derselben gewaehlten Sprache und behalten diese ueber Links und Reloads hinweg.",
+        metric4Kicker: "Anwenderfokus",
+        metric4Value: "Klar und direkt",
+        metric4Text: "Die Anleitung konzentriert sich auf Bedienung, Vorbereitung und praktische Nutzung statt auf technische Nebenthemen.",
+        whyTitle: "Dokumentationsprinzipien",
+        whyText: "Diese Bedienungsanleitung fuehrt Schritt fuer Schritt durch Anzeige, Bewertung und Ausfuehrung. So werden Bedienfehler vermieden und typische Rueckfragen schon vorab beantwortet.",
+        whyH1: "Echte Bedienlogik statt Screenshot-Sammlung",
+        whyP1: "Jede Bildkarte erklaert nicht nur was sichtbar ist, sondern welche Frage der jeweilige Bereich beantwortet und wann der Nutzer dort hingehen soll.",
+        whyH2: "Kritische Einstellungen sind markiert",
+        whyP2: "Auto-Execution, News-Gates, Drawdown-Limits, MinScore und Pending-/Stop-Logik muessen optisch als risikorelevant erkennbar sein.",
+        whyH3: "Mehrsprachigkeit ohne Inkonsistenz",
+        whyP3: "Die Nutzer duerfen nicht in Englisch lesen und dann bei der Input-Referenz wieder auf Deutsch landen. Die gesamte Doku muss sprachsynchron bleiben.",
+        workflowTitle: "Empfohlene Reihenfolge: so arbeitest du mit dem Screener",
+        workflowText: "Am einfachsten ist es, wenn du immer erst im Hauptfenster beginnst und erst danach in Tabs, Overlays und den Handelsbereich wechselst. So bleibt jede Entscheidung nachvollziehbar.",
+        step1H: "Opportunity finden",
+        step1P: "Im Haupttable zuerst Symbol, Signal, IQ, Spread, MTF und Reason-Stack lesen. Nur hier entsteht die erste Priorisierung.",
+        step2H: "Tab-Frage beantworten",
+        step2P: "Jeder Tab beantwortet eine andere Frage. Deshalb solltest du nicht zwischen den Ansichten springen, sondern gezielt die passende Information lesen.",
+        step3H: "Overlay verifizieren",
+        step3P: "Erst danach Forecast, Market Profile, Supply/Demand oder Tiefenkontext verwenden. Overlays bestaetigen die These, sie erzeugen sie nicht.",
+        step4H: "Execution diszipliniert ausfuehren",
+        step4P: "Das Floating Panel ist fuer die direkte Bedienung gedacht. Wenn Risiko, News-Filter oder andere Schutzregeln gegen einen Trade sprechen, sollte kein Trade eroeffnet werden.",
+        dashboardTitle: "Dashboard und Tabs: jeder Bereich hat eine klare Aufgabe",
+        dashboardText: "Die folgenden Karten zeigen dir fuer jeden sichtbaren Bereich, wofuer er gedacht ist, worauf du achten solltest und welche Fehlinterpretationen du vermeiden solltest.",
+        criticalTitle: "Kritische Einstellungen und Stellen",
+        criticalText: "",
+        overlayTitle: "Chart-Overlays: Kontext, nicht Showeffekt",
+        overlayText: "Overlays sind Zusatzinformationen. Jedes Overlay sollte dir klar zeigen, wofuer es gedacht ist und wann du es besser nicht ueberbewertest.",
+        panelTitle: "Floating Panel / Positionsgroesse",
+        panelText: "Dieser Bereich ist fuer die direkte Eingabe gedacht. Hier geht es um Orderart, Positionsgroesse, Stop-Loss, Take-Profit und sauberes manuelles Arbeiten.",
+        inputsTitle: "Input-Referenz",
+        inputsText: "Die Input-Referenz erklaert nicht nur den Namen eines Parameters, sondern vor allem seine Wirkung. Besonders wichtige Einstellungen werden deutlich markiert.",
+        inputsCtaTitle: "Input-Referenz in derselben Sprache oeffnen",
+        inputsCtaText: "Die Referenz folgt automatisch der aktuellen Sprachwahl und passt damit direkt zur geoeffneten Anleitung.",
+        inputReferenceCta: "Input-Referenz",
+        proTitle: "Installation und Vorbereitung",
+        proText: "Bevor der Screener wie im Video arbeitet, muessen die benoetigten Zusatzdateien in den richtigen MetaTrader-Ordnern liegen. Die folgenden Anleitungen zeigen dir die Ordnerstruktur und die noetigen Schritte.",
+        footerNote: "CV QuantMarketScreenerPro Manual 2026-06-06. Landingpage-Version mit sprachsynchroner Struktur und klar beschriebenen Arbeitsbereichen."
+      },
+      en: {
+        sidebarLead: "Multilingual landing-page manual for dashboard, overlay, floating-panel and input workflow.",
+        langLabel: "Language",
+        navLabel: "Navigation",
+        navHero: "Start",
+        navWhy: "Documentation principles",
+        navWorkflow: "Operator workflow",
+        navDashboard: "Dashboard & tabs",
+        navCritical: "Critical settings",
+        navOverlays: "Chart overlays",
+        navPanel: "Floating panel",
+        navInputs: "Input reference",
+        navPro: "Installation",
+        heroEyebrow: "Manual for professional operators",
+        heroTitle: "A real user manual for a real multi-asset screener",
+        heroP1: "This version is built to actively reduce support demand: image, context and explanation are no longer loosely coupled, but tightly bound per module.",
+        heroP2: "Critical settings are visually marked in red, the input reference follows the selected language, and the full manual is built around operator comprehension instead of text volume.",
+        manualRefCta: "Open input reference",
+        criticalCta: "Review critical settings",
+        metric1Kicker: "Module coverage",
+        metric1Value: "9 tabs + 4 overlays",
+        metric1Text: "Dashboard, overlay and execution paths are explained as discrete operator contexts instead of a loose screenshot collection.",
+        metric2Kicker: "Support risk",
+        metric2Value: "Critical inputs in red",
+        metric2Text: "Settings that strongly affect auto-execution, risk, news or tester governance are visually prominent and unambiguous.",
+        metric3Kicker: "Language sync",
+        metric3Value: "DE / EN / IT / ES",
+        metric3Text: "Manual and input reference follow the same selected language and preserve it across links and reloads.",
+        metric4Kicker: "User focus",
+        metric4Value: "Clear and direct",
+        metric4Text: "The manual focuses on operation, setup and practical use instead of technical side topics.",
+        whyTitle: "Documentation principles",
+        whyText: "This user manual is built for clear operator guidance. Dashboard, execution, risk, overlays and portfolio context are documented in a way that reduces misuse and answers support questions before they arise.",
+        whyH1: "Real operating logic instead of a screenshot dump",
+        whyP1: "Every visual card explains not only what is visible, but which question that area answers and when the user should go there.",
+        whyH2: "Critical settings are marked",
+        whyP2: "Auto-execution, news gates, drawdown limits, min-score and pending/stop logic must be visually readable as risk-relevant.",
+        whyH3: "Multilingual without inconsistency",
+        whyP3: "Users must not read in English and then land on a German input reference. The entire documentation must remain language-synchronous.",
+        workflowTitle: "Operator workflow: how the screener should actually be read",
+        workflowText: "The biggest support mistake happens when users start directly in the chart or in isolated overlays. The robust workflow starts at the top of the screener and ends only in manual or automated execution.",
+        step1H: "Find the opportunity",
+        step1P: "Read symbol, signal, IQ, spread, MTF and reason stack in the main table first. That is where priority is created.",
+        step2H: "Answer the tab question",
+        step2P: "Signal, Execution, Risk, Structure, Analytics, AI, Gauge and INST answer different operator questions. Each tab has a different job.",
+        step3H: "Verify with overlays",
+        step3P: "Only then use Forecast, Market Profile, Supply/Demand or Deep Context. Overlays confirm the thesis; they do not create it.",
+        step4H: "Execute with discipline",
+        step4P: "The floating panel is an operator desk, not a governance bypass. If risk, news or decision layers block the setup, the trade remains blocked.",
+        dashboardTitle: "Dashboard and tabs: each screen must make one clear statement",
+        dashboardText: "The cards below are bound 1:1: title, screenshot and copy describe exactly the same visual area. Nothing drifts out of alignment anymore.",
+        criticalTitle: "Critical settings and critical points",
+        criticalText: "",
+        overlayTitle: "Chart overlays: context, not showmanship",
+        overlayText: "The overlay section must not feel like an effect catalog. Each overlay must explain which question it answers and which misreadings to avoid.",
+        panelTitle: "Floating panel / position sizer workstation",
+        panelText: "The manual desk needs different documentation than the dashboard: here the focus is intervention rights, order mode, risk inputs and operational cleanliness.",
+        inputsTitle: "Input reference and input architecture",
+        inputsText: "The input reference must not only show names, but also the effect of each parameter. Critical inputs need a red risk marker and a clear function description.",
+        inputsCtaTitle: "Open the technical reference in the same language",
+        inputsCtaText: "The reference automatically follows the active language and stays synchronized with the landing-page manual.",
+        inputReferenceCta: "Input reference",
+        proTitle: "Installation and preparation",
+        proText: "Before the screener works as shown in the video, the required add-on files must be placed in the correct MetaTrader folders. The guides below show the folder structure and the required steps.",
+        footerNote: "CV QuantMarketScreenerPro Manual 2026-06-06. Landing-page version with language-synchronous reference structure and tightly bound visual work cards."
+      },
+      it: {
+        sidebarLead: "Manuale landing page multilingue per dashboard, overlay, floating panel e workflow degli input.",
+        langLabel: "Lingua",
+        navLabel: "Navigazione",
+        navHero: "Inizio",
+        navWhy: "Principi di documentazione",
+        navWorkflow: "Workflow operatore",
+        navDashboard: "Dashboard e tab",
+        navCritical: "Impostazioni critiche",
+        navOverlays: "Overlay grafici",
+        navPanel: "Floating panel",
+        navInputs: "Riferimento input",
+        navPro: "Installazione",
+        heroEyebrow: "Manuale per operatori professionali",
+        heroTitle: "Un vero manuale operativo per un vero screener multi-asset",
+        heroP1: "Questa versione e progettata per ridurre attivamente le richieste di supporto: immagine, contesto e spiegazione non sono piu separati, ma legati a ogni modulo.",
+        heroP2: "Le impostazioni critiche sono evidenziate in rosso, il riferimento input segue la lingua selezionata e l'intero manuale e costruito per la comprensione operativa.",
+        manualRefCta: "Apri il riferimento input",
+        criticalCta: "Vedi impostazioni critiche",
+        metric1Kicker: "Copertura moduli",
+        metric1Value: "9 tab + 4 overlay",
+        metric1Text: "Dashboard, overlay ed execution sono spiegati come contesti operativi distinti.",
+        metric2Kicker: "Rischio supporto",
+        metric2Value: "Input critici in rosso",
+        metric2Text: "Le impostazioni che influenzano auto-execution, rischio, news o governance del tester sono mostrate in modo evidente.",
+        metric3Kicker: "Sincronia lingua",
+        metric3Value: "DE / EN / IT / ES",
+        metric3Text: "Manuale e riferimento input seguono la stessa lingua selezionata e la mantengono tra link e reload.",
+        metric4Kicker: "Focus utente",
+        metric4Value: "Chiaro e diretto",
+        metric4Text: "Il manuale si concentra su utilizzo, preparazione e uso pratico invece che su temi tecnici secondari.",
+        whyTitle: "Principi di documentazione",
+        whyText: "Questo manuale operativo e progettato per una guida chiara dell'operatore. Dashboard, esecuzione, rischio, overlay e contesto di portafoglio sono documentati in modo da ridurre gli errori d'uso e anticipare le richieste di supporto.",
+        whyH1: "Logica operativa reale invece di una raccolta di screenshot",
+        whyP1: "Ogni scheda visuale spiega cosa si vede, quale domanda risponde e quando il lettore deve usare quella sezione.",
+        whyH2: "Le impostazioni critiche sono contrassegnate",
+        whyP2: "Auto-execution, filtri news, limiti di drawdown, min-score e logica pending/stop devono essere percepiti come elementi di rischio.",
+        whyH3: "Multilingua senza incoerenze",
+        whyP3: "L'utente non deve leggere in inglese e poi ritrovarsi il riferimento input in tedesco.",
+        workflowTitle: "Workflow operatore: come leggere davvero lo screener",
+        workflowText: "L'errore di supporto piu frequente nasce quando l'utente parte direttamente dal grafico o da overlay isolati.",
+        step1H: "Trovare l'opportunita",
+        step1P: "Leggere prima symbol, signal, IQ, spread, MTF e reason stack nella tabella principale.",
+        step2H: "Rispondere alla domanda del tab",
+        step2P: "Signal, Execution, Risk, Structure, Analytics, AI, Gauge e INST rispondono a domande operative diverse.",
+        step3H: "Verificare con gli overlay",
+        step3P: "Solo dopo usare Forecast, Market Profile, Supply/Demand o Deep Context.",
+        step4H: "Eseguire con disciplina",
+        step4P: "Il floating panel e una desk operativa, non un bypass della governance.",
+        dashboardTitle: "Dashboard e tab: ogni schermata deve dare un messaggio chiaro",
+        dashboardText: "Le carte seguenti sono legate 1:1: titolo, screenshot e descrizione parlano della stessa area visuale.",
+        criticalTitle: "Impostazioni critiche e punti critici",
+        criticalText: "",
+        overlayTitle: "Overlay grafici: contesto, non spettacolo",
+        overlayText: "La sezione overlay non deve sembrare un catalogo di effetti.",
+        panelTitle: "Floating panel / position sizer workstation",
+        panelText: "La desk manuale richiede una documentazione diversa dal dashboard.",
+        inputsTitle: "Riferimento input e architettura input",
+        inputsText: "Il riferimento input deve mostrare non solo i nomi ma anche l'effetto di ogni parametro.",
+        inputsCtaTitle: "Apri il riferimento tecnico nella stessa lingua",
+        inputsCtaText: "Il riferimento segue automaticamente la lingua attiva e resta sincronizzato con il manuale.",
+        inputReferenceCta: "Riferimento input",
+        proTitle: "Installazione e preparazione",
+        proText: "Prima che lo screener funzioni come nel video, i file aggiuntivi richiesti devono trovarsi nelle cartelle corrette di MetaTrader. Le guide seguenti mostrano la struttura e i passaggi.",
+        footerNote: "CV QuantMarketScreenerPro Manual 2026-06-06. Versione landing page con struttura di riferimento sincronizzata per lingua."
+      },
+      es: {
+        sidebarLead: "Manual landing page multilingue para dashboard, overlays, floating panel y flujo de inputs.",
+        langLabel: "Idioma",
+        navLabel: "Navegacion",
+        navHero: "Inicio",
+        navWhy: "Principios de documentación",
+        navWorkflow: "Flujo del operador",
+        navDashboard: "Dashboard y tabs",
+        navCritical: "Ajustes criticos",
+        navOverlays: "Overlays del grafico",
+        navPanel: "Floating panel",
+        navInputs: "Referencia de inputs",
+        navPro: "Instalacion",
+        heroEyebrow: "Institutional operator manual",
+        heroTitle: "Un manual de usuario real para un screener multi-asset real",
+        heroP1: "Esta version esta pensada para reducir activamente consultas de soporte: imagen, contexto y explicacion ya no estan sueltos, sino unidos por modulo.",
+        heroP2: "Los ajustes criticos se marcan en rojo, la referencia de inputs sigue el idioma seleccionado y toda la manual esta construida para la comprension operativa.",
+        criticalCta: "Ver ajustes criticos",
+        metric1Kicker: "Cobertura de modulos",
+        metric1Value: "9 tabs + 4 overlays",
+        metric1Text: "Dashboard, overlays y rutas de ejecucion se explican como contextos operativos separados.",
+        metric2Kicker: "Riesgo de soporte",
+        metric2Value: "Inputs criticos en rojo",
+        metric2Text: "Los ajustes que afectan auto-execution, riesgo, noticias o governance del tester se destacan claramente.",
+        metric3Kicker: "Sincronia de idioma",
+        metric3Value: "DE / EN / IT / ES",
+        metric3Text: "Manual y referencia de inputs siguen el mismo idioma y lo conservan al navegar.",
+        metric4Kicker: "Enfoque de usuario",
+        metric4Value: "Claro y directo",
+        metric4Text: "El manual se centra en uso, preparacion y aplicacion practica en lugar de temas tecnicos secundarios.",
+        whyTitle: "Principios de documentación",
+        whyText: "Este manual de usuario esta diseñado para una guia clara del operador. Dashboard, ejecucion, riesgo, overlays y contexto de cartera se documentan de forma que se reduzcan los errores de uso y se respondan antes las dudas de soporte.",
+        whyH1: "Logica operativa real en lugar de una coleccion de screenshots",
+        whyP1: "Cada tarjeta visual explica que se ve, que pregunta responde y cuando debe usarse.",
+        whyH2: "Los ajustes criticos estan marcados",
+        whyP2: "Auto-execution, filtros de noticias, limites de drawdown, min-score y logica pending/stop deben sentirse como elementos de riesgo.",
+        whyH3: "Multilingue sin incoherencias",
+        whyP3: "El usuario no debe leer en ingles y terminar en una referencia de inputs en aleman.",
+        workflowTitle: "Flujo del operador: como debe leerse realmente el screener",
+        workflowText: "El mayor error de soporte ocurre cuando el usuario empieza directamente en el grafico o en overlays aislados.",
+        step1H: "Encontrar la oportunidad",
+        step1P: "Primero leer symbol, signal, IQ, spread, MTF y reason stack en la tabla principal.",
+        step2H: "Responder la pregunta del tab",
+        step2P: "Signal, Execution, Risk, Structure, Analytics, AI, Gauge e INST responden preguntas operativas distintas.",
+        step3H: "Verificar con overlays",
+        step3P: "Solo despues usar Forecast, Market Profile, Supply/Demand o Deep Context.",
+        step4H: "Ejecutar con disciplina",
+        step4P: "El floating panel es una mesa de operador, no un bypass de governance.",
+        dashboardTitle: "Dashboard y tabs: cada pantalla debe dar un mensaje claro",
+        dashboardText: "Las tarjetas siguientes estan vinculadas 1:1: titulo, screenshot y texto describen la misma zona visual.",
+        criticalTitle: "Ajustes criticos y puntos criticos",
+        criticalText: "",
+        overlayTitle: "Overlays del grafico: contexto, no exhibicion",
+        overlayText: "La seccion de overlays no debe parecer un catalogo de efectos.",
+        panelTitle: "Floating panel / position sizer workstation",
+        panelText: "La mesa manual necesita una documentacion distinta al dashboard.",
+        inputsTitle: "Referencia de inputs y arquitectura de inputs",
+        inputsText: "La referencia de inputs debe mostrar no solo nombres, sino tambien el efecto de cada parametro.",
+        inputsCtaTitle: "Abrir la referencia tecnica en el mismo idioma",
+        inputsCtaText: "La referencia sigue automaticamente el idioma activo y permanece sincronizada con la manual.",
+        proTitle: "Instalacion y preparacion",
+        proText: "Antes de que el screener funcione como en el video, los archivos adicionales necesarios deben estar en las carpetas correctas de MetaTrader. Las guias siguientes muestran la estructura y los pasos.",
+        footerNote: "CV QuantMarketScreenerPro Manual 2026-06-06. Version landing page con estructura de referencia sincronizada por idioma."
+      }
+    };
+
+      t.es.navWhy = "Principios de documentacion";
+      t.es.whyTitle = "Principios de documentacion";
+      t.es.heroEyebrow = "Manual para operadores profesionales";
+      t.es.manualRefCta = "Abrir referencia de inputs";
+      t.es.inputReferenceCta = "Referencia de inputs";
+
+      const ASSET_VERSION = "2026-06-06-6";
+      const assetUrl = (path) => `${path}?v=${ASSET_VERSION}`;
+
+      const dashboardCards = [
+      {
+        id:"dash-main", type:"dashboard", image:"manual_assets/Screenshot 2026-05-30 001330.png",
+        critical:false,
+        de:{title:"Dashboard-Masterview", subtitle:"Gesamtscreener, Opportunity-Tabelle, Symbolfokus und Handelsbereich auf einer Seite.", bullets:[["Wofuer dieser Bereich da ist","Hier entscheidest du zuerst, welches Symbol ueberhaupt genauer angesehen werden soll."],["Was du hier zuerst lesen solltest","Signal, IQ, Spread, MTF, Gruende sowie die Leiste fuer Session und Modus. Danach wechselst du in einen passenden Detail-Tab."],["Warum das wichtig ist","Wer diesen Bereich falsch liest, missversteht spaeter oft Blocker, fehlende Trades oder scheinbar widerspruechliche Zusatzanzeigen."]]},
+        en:{title:"Dashboard master view", subtitle:"Full screener, opportunity table, symbol focus and execution terminal in one control surface.", bullets:[["What this area means","This is the first operator layer. It decides which symbol deserves attention at all."],["What to read here","Signal, IQ, spread, MTF, reasons and the session/mode strip first. Only then move into detail tabs."],["Why it matters professionally","If this layer is read incorrectly, most later support questions around blockers, missing trades or contradictory overlays are created here."]]},
+        it:{title:"Vista master del dashboard", subtitle:"Screener completo, tabella opportunita, focus sul simbolo e terminale di execution in un'unica superficie.", bullets:[["Funzione dell'area","E il primo livello operativo. Qui si decide quale simbolo merita attenzione."],["Cosa leggere","Signal, IQ, spread, MTF, reasons e la barra session/mode prima di tutto."],["Perche conta","Se questo livello viene letto male, nascono quasi tutte le richieste di supporto successive."]]},
+        es:{title:"Vista maestra del dashboard", subtitle:"Screener completo, tabla de oportunidades, foco del simbolo y terminal de ejecucion en una sola superficie.", bullets:[["Que significa esta zona","Es la primera capa operativa. Aqui se decide que simbolo merece atencion."],["Que leer aqui","Signal, IQ, spread, MTF, reasons y la barra superior de sesion/modo."],["Por que importa","Si esta capa se interpreta mal, aqui nacen la mayoria de dudas de soporte posteriores."]]}
+      },
+      {
+        id:"tab-signal", type:"tab", image:"manual_assets/Screenshot 2026-05-30 001400.png",
+        de:{title:"Signal-Tab", subtitle:"Beantwortet: Was ist die Idee hinter dem Trade?", bullets:[["Kernfunktion","Hier siehst du Strukturphase, Volumenzustand, Session, Setup-Typ sowie die wichtigsten positiven und negativen Faktoren."],["Wann du ihn nutzen solltest","Nutze diesen Tab, um zu pruefen, ob die Handelsidee nachvollziehbar ist, bevor du an den Einstieg denkst."],["Wichtiger Hinweis","Ein optisch schoener Chart ersetzt diese Begruendung nicht. Ohne klare Handelsidee steigt das Risiko fuer Fehltrades."]]},
+        en:{title:"Signal tab", subtitle:"Answers: What is the trade thesis and why does it exist at all?", bullets:[["Core function","Structure phase, volume state, session, setup type, positive drivers and blockers in narrative form."],["Operator value","Use this tab to validate that the setup is logically coherent before thinking about execution."],["Avoid this misread","A nice chart never replaces this tab. Visual appeal without a thesis leads to bad trades."]]},
+        it:{title:"Tab Signal", subtitle:"Risponde: qual e la tesi del trade e perche esiste davvero?", bullets:[["Funzione chiave","Fase strutturale, volume, sessione, tipo di setup, driver positivi e blocchi."],["Utilita operativa","Conferma che il setup abbia logica prima di pensare all'execution."],["Errore da evitare","Un grafico bello non sostituisce questa lettura."]]},
+        es:{title:"Tab Signal", subtitle:"Responde: cual es la tesis del trade y por que existe realmente?", bullets:[["Funcion clave","Fase estructural, estado de volumen, sesion, tipo de setup, drivers positivos y bloqueos."],["Valor operativo","Confirma que el setup tenga logica antes de pasar a la ejecucion."],["Error a evitar","Un grafico atractivo no sustituye esta lectura."]]}
+      },
+      {
+        id:"tab-execution", type:"tab", image:"manual_assets/Screenshot 2026-05-30 001412.png", critical:true,
+        de:{title:"Execution-Tab", subtitle:"Beantwortet: Kann der Trade ausgefuehrt werden oder nicht?", bullets:[["Kernfunktion","Hier werden Handelsbereitschaft, Spread, Slippage, Pending-Schutz und konkrete Sperrgruende angezeigt."],["Kritische Stelle","Wenn hier Blocker stehen, sollte kein Trade ausgefuehrt werden, selbst wenn Signal und Chart gut aussehen."],["Worauf du achten musst","Spread, Slippage und Schutzregeln fuer Pending Orders gehoeren zu den wichtigsten Risikothemen."]]},
+        en:{title:"Execution tab", subtitle:"Answers: Why is the trade ready, blocked or only suitable for staged placement?", bullets:[["Core function","Exec, fill, ready, spread and slip scoring plus pending safety and explicit blocked-by reasons."],["Critical point","If blockers appear here, the manual must say clearly: no trade, even if signal and chart look attractive."],["Professional marker","Execution, spread, slippage and pending safety are risk-critical and must always be treated as red topics."]]},
+        it:{title:"Tab Execution", subtitle:"Risponde: perche il trade e pronto, bloccato o solo staged?", bullets:[["Funzione chiave","Score di exec, fill, ready, spread e slip con pending safety e motivi di blocco."],["Punto critico","Se qui compaiono blocchi, la risposta corretta e: niente trade."],["Marker professionale","Execution, spread, slippage e pending safety sono temi rossi."]]},
+        es:{title:"Tab Execution", subtitle:"Responde: por que el trade esta listo, bloqueado o solo apto para staged placement?", bullets:[["Funcion clave","Scoring de exec, fill, ready, spread y slip, mas pending safety y razones exactas de bloqueo."],["Punto critico","Si aqui hay bloqueos, la conclusion correcta es: no trade."],["Marcador profesional","Execution, spread, slippage y pending safety son temas rojos."]]}
+      },
+      {
+        id:"tab-risk", type:"tab", image:"manual_assets/Screenshot 2026-05-30 001448.png", critical:true,
+        de:{title:"Risk-Tab", subtitle:"Beantwortet: Passt der Trade zu deinem Risiko und deinem Limit?", bullets:[["Kernfunktion","Hier werden Risiko, Liquiditaet, Erwartungswert sowie der aktuelle Markt- und Timing-Kontext zusammengefasst."],["Warum dieser Tab wichtig ist","Viele optisch gute Setups werden hier zurecht gestoppt, weil Risiko, Budget oder Marktumfeld nicht passen."],["Besonders wichtige Einstellungen","Risk %, Hard DD, Daily DD, Max Loss Per Trade, Portfolio Max Risk und Budget-Einstellungen."]]},
+        en:{title:"Risk tab", subtitle:"Answers: Does the setup fit the current risk, budget and context envelope?", bullets:[["Core function","Risk envelope, liquidity, alignment, expectancy and session, timing and cluster context."],["Why this tab is underestimated","Many visually attractive setups correctly die here because risk, budget or state alignment do not fit."],["Critical linked inputs","Risk %, hard DD, daily DD, max loss per trade, portfolio max risk and budget settings."]]},
+        it:{title:"Tab Risk", subtitle:"Risponde: il setup rientra nella finestra di rischio, budget e contesto?", bullets:[["Funzione chiave","Risk envelope, liquidita, alignment, expectancy e contesto operativo."],["Perche e sottovalutato","Molti setup belli vengono giustamente fermati qui."],["Input critici","Risk %, hard DD, daily DD, max loss per trade e budget."]]},
+        es:{title:"Tab Risk", subtitle:"Responde: el setup encaja en la ventana actual de riesgo, presupuesto y contexto?", bullets:[["Funcion clave","Risk envelope, liquidez, alignment, expectancy y contexto de sesion, timing y cluster."],["Por que se subestima","Muchos setups visualmente buenos mueren aqui correctamente."],["Inputs criticos","Risk %, hard DD, daily DD, max loss per trade y presupuestos."]]}
+      },
+      {
+        id:"tab-structure",
+        type:"tab",
+        image:"manual_assets/Screenshot 2026-05-30 001511.png",
+        de:{title:"Structure-Tab", subtitle:"Beantwortet: Wie stehen Preis und wichtige Strukturzonen zueinander?", bullets:[["Kernfunktion","Dieser Tab zeigt Preislinie, VWAP, POC-/VAH-/VAL-Level, Swing-Marken und die aktuelle Marktstruktur."],["Wann du ihn brauchst","Nutze ihn zur visuellen Bestaetigung, nicht als ersten Filter fuer die Symbolauswahl."],["Wichtiger Hinweis","Dieser Bereich ist eine Preislandkarte. Er ersetzt weder Risiko- noch Entscheidungspruefung."]]},
+        en:{title:"Structure tab", subtitle:"Answers: How do price, VWAP and structure levels relate to each other?", bullets:[["Core function","Price line, VWAP, POC/VAH/VAL levels, swing marks and current structure state."],["When to use it","For discretionary confirmation, not for first-pass selection."],["Support protection","This tab must never be confused with analytics or risk. It is the price map, not the governance layer."]]},
+        it:{title:"Tab Structure", subtitle:"Risponde: come si relazionano prezzo, VWAP e livelli strutturali?", bullets:[["Funzione chiave","Linea prezzo, VWAP, livelli POC/VAH/VAL e stato strutturale."],["Quando usarlo","Per conferma discrezionale, non per la prima selezione."],["Protezione supporto","E una mappa di prezzo, non la governance."]]},
+        es:{title:"Tab Structure", subtitle:"Responde: como se relacionan precio, VWAP y niveles estructurales?", bullets:[["Funcion clave","Linea de precio, VWAP, niveles POC/VAH/VAL y estado estructural."],["Cuando usarlo","Para confirmacion discrecional, no para la seleccion inicial."],["Proteccion de soporte","Es un mapa de precio, no la capa de governance."]]}
+      },
+      {
+        id:"tab-analytics",
+        type:"tab",
+        image:"manual_assets/Screenshot 2026-05-30 001526.png",
+        de:{title:"Analytics-Tab", subtitle:"Beantwortet: Welche Kennzahlen staerken oder schwaechen den Score?", bullets:[["Kernfunktion","Hier werden Score-Bausteine und wichtige Kennzahlen kompakt zusammengefasst."],["Richtige Anwendung","Gut geeignet fuer Vergleiche und um besser zu verstehen, warum sich Bewertungen aendern."],["Falsche Anwendung","Nicht als alleinigen Ausloeser fuer einen Trade verwenden. Dieser Tab erklaert, entscheidet aber nicht allein."]]},
+        en:{title:"Analytics tab", subtitle:"Answers: Which metric is supporting or damaging the total score?", bullets:[["Core function","Score stack, execution stack and quant snapshot in compressed metric form."],["Correct use","Useful for tuning, comparisons and understanding why scores move."],["Wrong use","Do not use it as a standalone trigger layer. It analyzes; it does not decide in isolation."]]},
+        it:{title:"Tab Analytics", subtitle:"Risponde: quale metrica sostiene o danneggia lo score totale?", bullets:[["Funzione chiave","Score stack, execution stack e quant snapshot."],["Uso corretto","Ottimo per tuning e comparazioni."],["Uso errato","Non usarlo come trigger autonomo."]]},
+        es:{title:"Tab Analytics", subtitle:"Responde: que metrica apoya o perjudica el score total?", bullets:[["Funcion clave","Score stack, execution stack y quant snapshot."],["Uso correcto","Sirve para tuning y comparaciones."],["Uso incorrecto","No debe usarse como gatillo aislado."]]}
+      },
+      {
+        id:"tab-ai", type:"tab", image:"manual_assets/Screenshot 2026-05-30 001546.png",
+        de:{title:"AI-Tab", subtitle:"Beantwortet: Welche KI-Bewertung spricht fuer oder gegen den Trade?", bullets:[["Kernfunktion","Hier siehst du Entscheidung, Confidence, Flow sowie unterstuetzende und bremsende Faktoren."],["Nutzen fuer die Praxis","Der Tab hilft dabei, zentrale Blocker von weniger wichtigen Einfluessen zu trennen."],["Wichtiger Hinweis","Die KI-Bewertung ist eine Zusatzhilfe. Sie ersetzt weder Risiko- noch Handelspruefung."]]},
+        en:{title:"AI tab", subtitle:"Answers: Which adaptive logic supports or resists the trade?", bullets:[["Core function","Decision, confidence, flow plus AI drivers and counterweight/blockers."],["Operator value","Separates core blockers from secondary adaptive influences."],["Professional reading","AI is an interpretation and weighting layer here, not a black-box replacement for risk or execution."]]},
+        it:{title:"Tab AI", subtitle:"Risponde: quale logica adattiva sostiene o frena il trade?", bullets:[["Funzione chiave","Decision, confidence, flow, AI drivers e blocker."],["Utilita","Separa blocchi centrali da influenze adattive secondarie."],["Lettura professionale","AI non sostituisce risk o execution."]]},
+        es:{title:"Tab AI", subtitle:"Responde: que logica adaptativa apoya o frena el trade?", bullets:[["Funcion clave","Decision, confidence, flow, AI drivers y blockers."],["Valor","Separa bloqueos centrales de influencias adaptativas secundarias."],["Lectura profesional","AI no sustituye riesgo ni ejecucion."]]}
+      },
+      {
+        id:"tab-gauge", type:"tab", image:"manual_assets/Screenshot 2026-05-30 001559.png",
+        de:{title:"Gauge-Tab", subtitle:"Beantwortet: Was sagen klassische Indikatoren in der Summe?", bullets:[["Kernfunktion","Dieser Tab fasst Oszillatoren und gleitende Durchschnitte fuer eine schnelle Orientierung zusammen."],["Wofuer er gut ist","Hilfreich als kurzer Zusatzcheck, ob klassische Indikatoren die Idee grob bestaetigen oder eher dagegen sprechen."],["Wofuer er nicht gedacht ist","Nicht als alleinige Regel fuer einen Einstieg. Er zeigt Tendenzen, aber kein komplettes Handelssignal."]]},
+        en:{title:"Gauge tab", subtitle:"Answers: How do classical oscillators and moving averages read in aggregate?", bullets:[["Core function","Aggregated oscillator and moving-average reading for fast orientation."],["Useful for","A fast secondary check to see whether classical indicators broadly support or resist the setup."],["Not useful for","Never as a standalone order rule. It is a sentiment window, not a complete setup system."]]},
+        it:{title:"Tab Gauge", subtitle:"Risponde: come si leggono in aggregato oscillatori classici e medie mobili?", bullets:[["Funzione chiave","Lettura aggregata di oscillatori e medie mobili."],["Quando aiuta","Per un controllo rapido secondario."],["Quando non basta","Mai come unica regola di ordine."]]},
+        es:{title:"Tab Gauge", subtitle:"Responde: como se leen en agregado los osciladores clasicos y las medias moviles?", bullets:[["Funcion clave","Lectura agregada de osciladores y medias moviles."],["Para que sirve","Para una comprobacion secundaria rapida."],["Para que no sirve","Nunca como regla unica de orden."]]}
+      },
+      {
+        id:"tab-inst", type:"tab", image:"manual_assets/Screenshot 2026-05-30 001616.png", critical:true,
+        de:{title:"INST-Tab", subtitle:"Beantwortet: Wie wirkt sich das Symbol auf dein Gesamtportfolio aus?", bullets:[["Kernfunktion","Hier werden Exponierung, Rangfolge, Korrelation, Diversifikation und ein kompaktes Symbolbild zusammengefasst."],["Warum das wichtig ist","Ein starkes Einzelsymbol kann trotzdem unpassend sein, wenn es das Gesamtportfolio zu einseitig oder zu riskant macht."],["Empfehlung","Besonders bei mehreren offenen Positionen oder aktivem Auto-Handel solltest du diesen Tab vor einer Freigabe mitpruefen."]]},
+        en:{title:"INST tab", subtitle:"Answers: What is the portfolio impact of the selected symbol?", bullets:[["Core function","Portfolio intelligence, exposure engine, ranking, correlation, diversification and selected-symbol snapshot."],["Why critical","A strong standalone symbol can still be strategically wrong here if portfolio, risk or correlation effects argue against it."],["Operator rule","Always read this tab before broad auto-execution. For market credibility, this is mandatory."]]},
+        it:{title:"Tab INST", subtitle:"Risponde: qual e l'impatto di portafoglio del simbolo selezionato?", bullets:[["Funzione chiave","Portfolio intelligence, exposure, ranking, correlazione e snapshot."],["Perche critico","Un simbolo forte da solo puo essere sbagliato a livello di portafoglio."],["Regola operativa","Leggerlo sempre prima di auto-execution ampia."]]},
+        es:{title:"Tab INST", subtitle:"Responde: cual es el impacto de cartera del simbolo seleccionado?", bullets:[["Funcion clave","Portfolio intelligence, exposure, ranking, correlacion y snapshot."],["Por que es critico","Un simbolo fuerte por si solo puede ser estrategicamente incorrecto a nivel de cartera."],["Regla operativa","Leer siempre antes de auto-execution amplia."]]}
+      }
+    ];
+
+    const overlayCards = [
+      {
+        id:"forecast", image:"manual_assets/Screenshot 2026-05-30 001810.png",
+        de:{title:"Forecast-Overlay", subtitle:"Moeglicher Verlauf zur aktuellen Handelsidee.", bullets:[["Wirkung","Zeigt einen moeglichen Verlauf, der zur aktuellen Idee passen koennte."],["Richtige Lesart","Nutze ihn fuer Szenarien, nicht als feste Vorhersage."],["Fehlinterpretation","Der Forecast ist kein Versprechen des Marktes, sondern nur eine Arbeitshilfe."]]},
+        en:{title:"Forecast overlay", subtitle:"Scenario projection for the trade idea.", bullets:[["Effect","Shows a plausible projected path based on the current thesis."],["Correct reading","Use it for scenarios, not for guarantees."],["Misread to avoid","Forecast is not a market promise. It is a structured hypothesis path."]]},
+        it:{title:"Overlay Forecast", subtitle:"Proiezione di scenario per l'idea di trade.", bullets:[["Effetto","Mostra un percorso plausibile della tesi."],["Lettura corretta","Per scenari, non per garanzie."],["Errore da evitare","Non e una promessa del mercato."]]},
+        es:{title:"Overlay Forecast", subtitle:"Proyeccion de escenario para la idea de trade.", bullets:[["Efecto","Muestra una trayectoria plausible segun la tesis actual."],["Lectura correcta","Sirve para escenarios, no para garantias."],["Error a evitar","No es una promesa del mercado."]]}
+      },
+      {
+        id:"profile", image:"manual_assets/Screenshot 2026-05-30 001848.png",
+        de:{title:"Market-Profile-Overlay", subtitle:"Value Area und POC fuer mehr Marktkontext.", bullets:[["Wirkung","Zeigt, wo der Markt eher ausgeglichen war und wo Ablehnung oder Akzeptanz entstanden ist."],["Richtige Lesart","Hilfreich, um zwischen Breakout und Seitwaertsphase besser zu unterscheiden."],["Fehlinterpretation","POC oder Value Area sind allein noch kein Einstiegssignal."]]},
+        en:{title:"Market profile overlay", subtitle:"Acceptance, value area and POC for contextual reading.", bullets:[["Effect","Shows where the market built balance, acceptance or rejection."],["Correct reading","Very useful for breakout-versus-balance decisions."],["Misread to avoid","POC or value area are not automatic entry signals without dashboard support."]]},
+        it:{title:"Overlay Market Profile", subtitle:"Accettazione, value area e POC per lettura contestuale.", bullets:[["Effetto","Mostra equilibrio, accettazione o rifiuto."],["Uso corretto","Ottimo per breakout contro balance."],["Errore da evitare","POC e value area non sono ingressi automatici."]]},
+        es:{title:"Overlay Market Profile", subtitle:"Aceptacion, value area y POC para lectura contextual.", bullets:[["Efecto","Muestra equilibrio, aceptacion o rechazo."],["Uso correcto","Muy util para decidir breakout frente a balance."],["Error a evitar","POC y value area no son entradas automaticas."]]}
+      },
+      {
+        id:"sd", image:"manual_assets/Screenshot 2026-05-30 001924.png", critical:true,
+        de:{title:"Supply-and-Demand-Zonen", subtitle:"Reaktionszonen fuer Einstieg, Retest und Absicherung.", bullets:[["Wirkung","Markiert Angebots- und Nachfragebereiche, an denen der Markt haeufig reagiert."],["Richtige Lesart","Gut fuer Retests, Absicherung und zur besseren Vorbereitung eines Einstiegs."],["Kritischer Hinweis","Eine Zone allein gibt keinen Trade frei. Risiko- und Handelspruefung bleiben notwendig."]]},
+        en:{title:"Supply-and-demand zones", subtitle:"Visual reaction and risk map for entries and retests.", bullets:[["Effect","Marks supply and demand areas as operating reaction zones."],["Correct reading","Ideal for retests, invalidation and reaction awareness."],["Critical note","Zones never replace risk or execution gates. A zone is context, not permission."]]},
+        it:{title:"Zone Supply and Demand", subtitle:"Mappa visuale di reazione e rischio per ingressi e retest.", bullets:[["Effetto","Segna aree di domanda e offerta."],["Uso corretto","Ottimo per retest e invalidazione."],["Nota critica","Le zone non sostituiscono i gate di rischio o execution."]]},
+        es:{title:"Zonas Supply and Demand", subtitle:"Mapa visual de reaccion y riesgo para entradas y retests.", bullets:[["Efecto","Marca zonas de oferta y demanda."],["Uso correcto","Muy util para retests e invalidacion."],["Nota critica","Las zonas no sustituyen los gates de riesgo o ejecucion."]]}
+      },
+      {
+        id:"deep", image:"manual_assets/Screenshot 2026-05-30 002036.png",
+        de:{title:"Tiefenkontext-Ansicht", subtitle:"Geballter Zusatzkontext aus Fibo, MACD, ADX und Stoch-Divergenz.", bullets:[["Wirkung","Zeigt mehrere Zusatzsignale fuer ein einzelnes Symbol auf einen Blick."],["Richtige Lesart","Sinnvoll erst dann, wenn Dashboard, Risiko und Handelsfreigabe bereits geprueft wurden."],["Fehlinterpretation","Viele Linien bedeuten nicht automatisch hohe Qualitaet. Ohne den Screener-Kontext wird diese Ansicht schnell ueberbewertet."]]},
+        en:{title:"Deep context view", subtitle:"Combined context from Fibo, MACD, ADX and stochastic divergence.", bullets:[["Effect","Provides a dense single-symbol read for advanced manual verification."],["Correct reading","Useful only after dashboard thesis and risk/execution state are already clear."],["Misread to avoid","Many lines do not automatically mean high quality. Without screener context, this screen is easily overread."]]},
+        it:{title:"Vista di contesto profondo", subtitle:"Contesto combinato da Fibo, MACD, ADX e Stoch divergence.", bullets:[["Effetto","Lettura densa del singolo simbolo per verifica avanzata."],["Uso corretto","Serve dopo che la tesi dashboard e risk/execution sono chiari."],["Errore da evitare","Molte linee non significano automaticamente alta qualita."]]},
+        es:{title:"Vista de contexto profundo", subtitle:"Contexto combinado de Fibo, MACD, ADX y divergencia estocastica.", bullets:[["Efecto","Lectura densa del simbolo para verificacion manual avanzada."],["Uso correcto","Util solo despues de que la tesis del dashboard y el estado de riesgo/ejecucion sean claros."],["Error a evitar","Muchas lineas no significan automaticamente alta calidad."]]}
+      }
+    ];
+
+    const panelCards = [
+      {
+        id:"market", image:"manual_assets/Screenshot 2026-05-30 002308.png", critical:true,
+        de:{title:"Floating Panel: Market-Modus", subtitle:"Direkter manueller Handel mit Risikoeingaben.", bullets:[["Wirkung","Hier kannst du Buy, Sell, Close, Reverse, Trail, Auto sowie wichtige Live-Einstellungen direkt bedienen."],["Wann du ihn nutzen solltest","Nur dann, wenn die uebrigen Pruefungen den Trade nicht blockieren und das Risiko passt."],["Kritischer Hinweis","Das Panel ist eine Bedienhilfe und kein Weg, Schutzregeln zu umgehen."]]},
+        en:{title:"Floating panel: market mode", subtitle:"Direct manual execution with live risk inputs.", bullets:[["Effect","The operator controls buy, sell, close, reverse, trail, auto and runtime inputs in real time."],["When professional","Only when global permissions, risk layers and news/decision gates are respected."],["Critical note","The panel is not a governance bypass. The manual must say this explicitly."]]},
+        it:{title:"Floating panel: modalita market", subtitle:"Esecuzione manuale diretta con input di rischio live.", bullets:[["Effetto","L'operatore controlla buy, sell, close, reverse, trail e input runtime."],["Quando e professionale","Solo se i gate globali vengono rispettati."],["Nota critica","Non e un bypass della governance."]]},
+        es:{title:"Floating panel: modo market", subtitle:"Ejecucion manual directa con inputs de riesgo live.", bullets:[["Efecto","El operador controla buy, sell, close, reverse, trail y inputs runtime."],["Cuando es profesional","Solo si se respetan permisos y gates globales."],["Nota critica","No es un bypass de governance."]]}
+      },
+      {
+        id:"limit", image:"manual_assets/Screenshot 2026-05-30 002308.png",
+        de:{title:"Floating Panel: Limit-Modus", subtitle:"Pending Orders mit klaren Preisstufen vorbereiten.", bullets:[["Wirkung","Hilft dir dabei, Einstiege gestaffelt und mit sichtbaren Preiszielen vorzubereiten."],["Wann du ihn brauchst","Wenn du nicht sofort per Market einsteigen willst, sondern bewusst auf ein bestimmtes Preisniveau wartest."],["Worauf du achten musst","Broker-Regeln, Pending-Schutz und Stop-/Ziel-Logik muessen weiterhin sauber zusammenpassen."]]},
+        en:{title:"Floating panel: limit mode", subtitle:"Staged pending placement with price ladders and target structure.", bullets:[["Effect","Supports staged entries, visible price levels and cleaner placement logic."],["When to use it","When entry should be tied to a price level instead of immediate market execution."],["Watch carefully","Pending safety, broker rules and SL/TP logic must still remain consistent."]]},
+        it:{title:"Floating panel: modalita limit", subtitle:"Inserimento pending staged con ladder di prezzo e struttura target.", bullets:[["Effetto","Supporta staged entries e logica di piazzamento pulita."],["Quando usarlo","Quando l'ingresso deve dipendere da un livello prezzo."],["Attenzione","Pending safety, regole broker e logica SL/TP devono restare coerenti."]]},
+        es:{title:"Floating panel: modo limit", subtitle:"Colocacion pending escalonada con ladder de precio y estructura objetivo.", bullets:[["Efecto","Soporta staged entries y logica de colocacion mas limpia."],["Cuando usarlo","Cuando la entrada debe depender de un nivel de precio."],["Atencion","Pending safety, reglas del broker y logica SL/TP deben seguir coherentes."]]}
+      }
+    ];
+
+    const criticalBlocks = {
+      de: [
+        {title:"Handelsfreigaben", body:"`InpAllowExecution`, `InpAutoExecute`, `InpCloseOnReverse`, `InpManageOpenPositions`: Diese Gruppe legt fest, ob der Screener nur beobachtet oder auch aktiv handeln darf."},
+        {title:"Risiko- und Drawdown-Limits", body:"`Risk %`, `Max Loss Per Trade`, `Hard DD %`, `Daily DD`, `Portfolio Max Risk %`: Diese Einstellungen bestimmen, wie stark ein Konto belastet werden darf."},
+        {title:"News- und Event-Filter", body:"`News Filter Enabled`, `News Block Auto Entries`, `News Reduce Risk Only`, `News Risk Multiplier`: Diese Einstellungen steuern, wie vorsichtig der Screener rund um wichtige Termine arbeitet."},
+        {title:"Wichtige Test-Einstellungen", body:"`Tester Max Drawdown %`, `Tester Min Trades Per Year`, `Tester Optimization Criterion`: Diese Werte beeinflussen, wie Testergebnisse bewertet und gefiltert werden."},
+        {title:"Signal- und Qualitaetsfilter", body:"`Min Score`, `Execution Quality Gate`, `Strong Signal Thresholds`, `Decision Gates`: Diese Parameter entscheiden, welche Chancen ueberhaupt sichtbar oder handelbar werden."},
+        {title:"Portfolio und Korrelation", body:"`Use Portfolio Engine`, `Use Correlation Control`, `Risk Budgets`, `INST`-Grenzwerte: Diese Einstellungen helfen dabei, mehrere Positionen im Gesamtbild sinnvoll zu steuern."}
+      ],
+      en: [
+        {title:"Execution permissions", body:"`InpAllowExecution`, `InpAutoExecute`, `InpCloseOnReverse`, `InpManageOpenPositions`: This group decides whether the screener only analyzes or also actually trades."},
+        {title:"Risk and DD limits", body:"`Risk %`, `Max Loss Per Trade`, `Hard DD %`, `Daily DD`, `Portfolio Max Risk %`: These inputs shape the product's credibility."},
+        {title:"News and event gates", body:"`News Filter Enabled`, `News Block Auto Entries`, `News Reduce Risk Only`, `News Risk Multiplier`: These inputs must always be documented as operationally critical."},
+        {title:"Tester governance", body:"`Tester Max Drawdown %`, `Tester Min Trades Per Year`, `Tester Optimization Criterion`: Without clean explanation, optimization results quickly look unprofessional or misleading."},
+        {title:"Signal and quality gates", body:"`Min Score`, `Execution Quality Gate`, `Strong Signal Thresholds`, `Decision Gates`: These parameters decide whether opportunities are released at all."},
+        {title:"Portfolio and correlation layer", body:"`Use Portfolio Engine`, `Use Correlation Control`, `Risk Budgets`, `INST` thresholds: for a multi-asset screener, these are not secondary settings."}
+      ],
+      it: [
+        {title:"Permessi di execution", body:"`InpAllowExecution`, `InpAutoExecute`, `InpCloseOnReverse`, `InpManageOpenPositions`: determinano se lo screener analizza soltanto o opera davvero."},
+        {title:"Limiti di rischio e DD", body:"`Risk %`, `Max Loss Per Trade`, `Hard DD %`, `Daily DD`, `Portfolio Max Risk %`: modellano la credibilita del prodotto."},
+        {title:"Gate news ed eventi", body:"`News Filter Enabled`, `News Block Auto Entries`, `News Reduce Risk Only`, `News Risk Multiplier`: devono essere documentati come critici."},
+        {title:"Governance del tester", body:"`Tester Max Drawdown %`, `Tester Min Trades Per Year`, `Tester Optimization Criterion`: senza spiegazione chiara i risultati di ottimizzazione sembrano poco seri."},
+        {title:"Gate di segnale e qualita", body:"`Min Score`, `Execution Quality Gate`, `Strong Signal Thresholds`, `Decision Gates`: decidono se le opportunita vengono rilasciate."},
+        {title:"Portafoglio e correlazione", body:"`Use Portfolio Engine`, `Use Correlation Control`, `Risk Budgets`, soglie `INST`: non sono impostazioni secondarie."}
+      ],
+      es: [
+        {title:"Permisos de ejecucion", body:"`InpAllowExecution`, `InpAutoExecute`, `InpCloseOnReverse`, `InpManageOpenPositions`: determinan si el screener solo analiza o tambien opera."},
+        {title:"Limites de riesgo y DD", body:"`Risk %`, `Max Loss Per Trade`, `Hard DD %`, `Daily DD`, `Portfolio Max Risk %`: definen la credibilidad del producto."},
+        {title:"Gates de noticias y eventos", body:"`News Filter Enabled`, `News Block Auto Entries`, `News Reduce Risk Only`, `News Risk Multiplier`: deben documentarse como criticos."},
+        {title:"Governance del tester", body:"`Tester Max Drawdown %`, `Tester Min Trades Per Year`, `Tester Optimization Criterion`: sin explicacion clara los resultados parecen poco serios."},
+        {title:"Gates de senal y calidad", body:"`Min Score`, `Execution Quality Gate`, `Strong Signal Thresholds`, `Decision Gates`: deciden si se liberan oportunidades."},
+        {title:"Capa de cartera y correlacion", body:"`Use Portfolio Engine`, `Use Correlation Control`, `Risk Budgets`, umbrales `INST`: en un screener multi-asset no son secundarios."}
+      ]
+    };
+
+    const criticalPills = {
+      de:["Auto-Handel","Risk %","Hard DD","News-Filter","Pending-Schutz","Portfolio-Risiko","Entscheidungsfilter","Tester-DD"],
+      en:["Auto-execution","Risk %","Hard DD","News filter","Pending safety","Portfolio risk","Decision gates","Tester DD"],
+      it:["Auto-execution","Risk %","Hard DD","Filtro news","Pending safety","Rischio portafoglio","Decision gates","Tester DD"],
+      es:["Auto-execution","Risk %","Hard DD","Filtro noticias","Pending safety","Riesgo cartera","Decision gates","Tester DD"]
+    };
+
+    const installBlocks = {
+      de: [
+        {
+          title:"Installation der benoetigten Indikatoren",
+          intro:"Damit die vollstaendige Funktionalitaet des CV QuantMarketScreener Pro verfuegbar ist, muessen die benoetigten CV-Indikatoren separat in MetaTrader 5 installiert werden.",
+          window:"MetaTrader 5 / Indikatoren",
+          badge:"Pfad fuer Indikatoren",
+          path:"MQL5/Indicators/Market/CV/",
+          tree:["Ordner anlegen: <strong>CV</strong>","Danach alle benoetigten CV-Indikatoren in diesen Ordner kopieren","Beispiele: CV ADX, CV StochasticRSIDiv, CV Fibonacci, CV MACD, CV Ribbon"],
+          steps:["Im MetaTrader 5 den Datenordner oeffnen.","Zum Ordner <code>MQL5/Indicators/Market/</code> wechseln.","Dort einen Unterordner mit dem Namen <code>CV</code> erstellen.","Alle benoetigten CV-Indikatoren in diesen Ordner kopieren.","MetaTrader 5 neu starten oder den Navigator aktualisieren."],
+          noteTitle:"Wichtiger Hinweis",
+          note:"Die Indikatoren sind nicht direkt im Produkt enthalten und muessen separat ueber unsere Download-Seite bezogen werden. Nur dann kann der Screener sie korrekt erkennen, laden, darstellen und verarbeiten.",
+          linkLabel:"Zur Download-Seite",
+          linkUrl:"https://www.mql5.com/de/users/calogerovella/seller"
+        },
+        {
+          title:"Installation der Symbol-Icons",
+          intro:"Damit die Symbol-Icons korrekt im Screener dargestellt werden, muss das separate Icon-Paket in den Images-Ordner von MetaTrader 5 kopiert werden.",
+          window:"MetaTrader 5 / Bilder",
+          badge:"Pfad fuer Symbol-Icons",
+          path:"MQL5/Images/",
+          tree:["ZIP-Datei entpacken","Ordnerstruktur unveraendert lassen","BMP-Dateien oder den enthaltenen Ordner nach <strong>MQL5/Images/</strong> kopieren"],
+          steps:["Kontaktiere uns per privater Nachricht, um den Download-Link fuer das Icon-Paket zu erhalten.","Entpacke die ZIP-Datei lokal auf deinem Rechner.","Kopiere den enthaltenen Ordner oder die BMP-Dateien in <code>MQL5/Images/</code>.","Die Ordnerstruktur darf dabei nicht veraendert werden.","MetaTrader 5 neu starten oder die Anzeige aktualisieren."],
+          noteTitle:"Hinweis",
+          note:"Die Icons sind nicht Bestandteil des Hauptprodukts und muessen separat heruntergeladen werden, damit die Darstellung wie im Video funktioniert.",
+          linkLabel:"Private Nachricht senden",
+          linkUrl:"https://www.mql5.com/de/users/calogerovella"
+        }
+      ],
+      en: [
+        {
+          title:"Install the required indicators",
+          intro:"To use the full functionality of CV QuantMarketScreener Pro, the required CV indicators must be installed separately in MetaTrader 5.",
+          window:"MetaTrader 5 / Indicators",
+          badge:"Indicator path",
+          path:"MQL5/Indicators/Market/CV/",
+          tree:["Create the folder: <strong>CV</strong>","Copy the required CV indicators into that folder","Examples: CV ADX, CV StochasticRSIDiv, CV Fibonacci, CV MACD, CV Ribbon"],
+          steps:["Open the MetaTrader 5 data folder.","Go to <code>MQL5/Indicators/Market/</code>.","Create a subfolder named <code>CV</code>.","Copy all required CV indicators into that folder.","Restart MetaTrader 5 or refresh the navigator."],
+          noteTitle:"Important note",
+          note:"The indicators are not included directly in the main product and must be downloaded separately so the screener can load and process them correctly.",
+          linkLabel:"Open download page",
+          linkUrl:"https://www.mql5.com/de/users/calogerovella/seller"
+        },
+        {
+          title:"Install the symbol icons",
+          intro:"To display the correct symbol icons inside the screener, the separate icon package must be copied into the Images folder of MetaTrader 5.",
+          window:"MetaTrader 5 / Images",
+          badge:"Icon path",
+          path:"MQL5/Images/",
+          tree:["Extract the ZIP file","Keep the folder structure unchanged","Copy the BMP files or included folder to <strong>MQL5/Images/</strong>"],
+          steps:["Contact us by private message to receive the icon package download link.","Extract the ZIP file on your computer.","Copy the included folder or BMP files into <code>MQL5/Images/</code>.","Do not change the folder structure.","Restart MetaTrader 5 or refresh the display."],
+          noteTitle:"Note",
+          note:"The icons are not part of the main product and must be downloaded separately if you want the same symbol view shown in the video.",
+          linkLabel:"Send private message",
+          linkUrl:"https://www.mql5.com/de/users/calogerovella"
+        }
+      ],
+      it: [
+        {
+          title:"Installazione degli indicatori richiesti",
+          intro:"Per usare tutte le funzioni del CV QuantMarketScreener Pro, gli indicatori CV richiesti devono essere installati separatamente in MetaTrader 5.",
+          window:"MetaTrader 5 / Indicatori",
+          badge:"Percorso indicatori",
+          path:"MQL5/Indicators/Market/CV/",
+          tree:["Creare la cartella: <strong>CV</strong>","Copiare gli indicatori CV richiesti in questa cartella","Esempi: CV ADX, CV StochasticRSIDiv, CV Fibonacci, CV MACD, CV Ribbon"],
+          steps:["Aprire la cartella dati di MetaTrader 5.","Andare in <code>MQL5/Indicators/Market/</code>.","Creare una sottocartella chiamata <code>CV</code>.","Copiare gli indicatori richiesti in questa cartella.","Riavviare MetaTrader 5 o aggiornare il navigatore."],
+          noteTitle:"Nota importante",
+          note:"Gli indicatori non sono inclusi direttamente nel prodotto principale e devono essere scaricati separatamente.",
+          linkLabel:"Pagina download",
+          linkUrl:"https://www.mql5.com/de/users/calogerovella/seller"
+        },
+        {
+          title:"Installazione delle icone simbolo",
+          intro:"Per visualizzare le icone corrette nello screener, il pacchetto icone deve essere copiato nella cartella Images di MetaTrader 5.",
+          window:"MetaTrader 5 / Immagini",
+          badge:"Percorso icone",
+          path:"MQL5/Images/",
+          tree:["Estrarre il file ZIP","Lasciare invariata la struttura","Copiare BMP o cartella inclusa in <strong>MQL5/Images/</strong>"],
+          steps:["Contattaci con un messaggio privato per ricevere il link di download.","Estrarre il file ZIP.","Copiare la cartella o i file BMP in <code>MQL5/Images/</code>.","Non modificare la struttura delle cartelle.","Riavviare MetaTrader 5 o aggiornare la vista."],
+          noteTitle:"Nota",
+          note:"Le icone non fanno parte del prodotto principale e devono essere scaricate separatamente.",
+          linkLabel:"Messaggio privato",
+          linkUrl:"https://www.mql5.com/de/users/calogerovella"
+        }
+      ],
+      es: [
+        {
+          title:"Instalacion de los indicadores requeridos",
+          intro:"Para usar toda la funcionalidad del CV QuantMarketScreener Pro, los indicadores CV necesarios deben instalarse por separado en MetaTrader 5.",
+          window:"MetaTrader 5 / Indicadores",
+          badge:"Ruta de indicadores",
+          path:"MQL5/Indicators/Market/CV/",
+          tree:["Crear la carpeta: <strong>CV</strong>","Copiar los indicadores CV requeridos dentro","Ejemplos: CV ADX, CV StochasticRSIDiv, CV Fibonacci, CV MACD, CV Ribbon"],
+          steps:["Abrir la carpeta de datos de MetaTrader 5.","Ir a <code>MQL5/Indicators/Market/</code>.","Crear una subcarpeta llamada <code>CV</code>.","Copiar los indicadores CV requeridos a esa carpeta.","Reiniciar MetaTrader 5 o actualizar el navegador."],
+          noteTitle:"Aviso importante",
+          note:"Los indicadores no estan incluidos directamente en el producto principal y deben descargarse por separado.",
+          linkLabel:"Pagina de descarga",
+          linkUrl:"https://www.mql5.com/de/users/calogerovella/seller"
+        },
+        {
+          title:"Instalacion de los iconos de simbolos",
+          intro:"Para mostrar los iconos correctos dentro del screener, el paquete de iconos debe copiarse a la carpeta Images de MetaTrader 5.",
+          window:"MetaTrader 5 / Imagenes",
+          badge:"Ruta de iconos",
+          path:"MQL5/Images/",
+          tree:["Extraer el archivo ZIP","No cambiar la estructura","Copiar los BMP o la carpeta incluida a <strong>MQL5/Images/</strong>"],
+          steps:["Contactanos por mensaje privado para recibir el enlace de descarga.","Extraer el archivo ZIP.","Copiar la carpeta o los archivos BMP a <code>MQL5/Images/</code>.","No modificar la estructura de carpetas.","Reiniciar MetaTrader 5 o actualizar la vista."],
+          noteTitle:"Nota",
+          note:"Los iconos no forman parte del producto principal y deben descargarse por separado.",
+          linkLabel:"Mensaje privado",
+          linkUrl:"https://www.mql5.com/de/users/calogerovella"
+        }
+      ]
+    };
+
+    function makeVisualCard(card, lang){
+      const content = card[lang] || card.de;
+      const criticalTag = card.critical
+        ? `<span class="tag risk">${lang==="de"?"Kritisch":lang==="en"?"Critical":lang==="it"?"Critico":"Critico"}</span>`
+        : `<span class="tag">${card.type==="tab" ? (lang==="de"?"Workspace-Tab":lang==="en"?"Workspace tab":lang==="it"?"Tab workspace":"Tab workspace") : card.type==="dashboard" ? (lang==="de"?"Leitbild":lang==="en"?"Control surface":lang==="it"?"Vista guida":"Vista guia") : (lang==="de"?"Overlay / Panel":lang==="en"?"Overlay / panel":lang==="it"?"Overlay / panel":"Overlay / panel")}</span>`;
+      const bulletCards = content.bullets.map(([h,p],idx)=>{
+        const criticalClass = idx===2 && card.critical ? "critical-note":"explain-card";
+        return `<div class="${criticalClass}"><h5>${h}</h5><p>${p}</p></div>`;
+      }).join("");
+      return `
+        <article class="visual-card">
+          <div class="visual-header">
+            <div>
+              ${criticalTag}
+              <h4>${content.title}</h4>
+              <p>${content.subtitle}</p>
+            </div>
+          </div>
+          <div class="visual-body">
+            <div class="visual-image">
+            <img src="${assetUrl(card.image)}" alt="${content.title}">
+            </div>
+            <div class="explain-box">${bulletCards}</div>
+          </div>
+        </article>`;
+    }
+
+    function renderCritical(lang){
+      const grid = document.getElementById("criticalGrid");
+      const pills = document.getElementById("criticalPills");
+      grid.innerHTML = criticalBlocks[lang].map(item => `
+        <article class="check">
+          <h4>${item.title}</h4>
+          <p>${item.body}</p>
+        </article>`).join("");
+      pills.innerHTML = criticalPills[lang].map(item => `<span class="pill critical">${item}</span>`).join("");
+    }
+
+    function renderPro(lang){
+      const target = document.getElementById("proGrid");
+      target.innerHTML = installBlocks[lang].map(block => `
+        <article class="install-card">
+          <h4>${block.title}</h4>
+          <p>${block.intro}</p>
+          <div class="install-layout">
+            <div class="install-visual">
+              <div class="install-window-bar">
+                <span>${block.window}</span>
+                <span>${block.badge}</span>
+              </div>
+              <div class="path-box">${block.path}</div>
+              <ul class="folder-tree">${block.tree.map(item => `<li>${item}</li>`).join("")}</ul>
+            </div>
+            <div class="install-copy">
+              <ol class="install-steps">${block.steps.map(item => `<li>${item}</li>`).join("")}</ol>
+              <div class="install-note">
+                <strong>${block.noteTitle}</strong>
+                <div>${block.note}</div>
+              </div>
+              <a class="install-link" href="${block.linkUrl}" target="_blank" rel="noopener noreferrer">${block.linkLabel}</a>
+            </div>
+          </div>
+        </article>`).join("");
+    }
+
+    function applyText(lang){
+      const dict = t[lang] || t.de;
+      document.documentElement.lang = lang;
+      document.title = "CV QuantMarketScreenerPro Manual 2026-06-06";
+      Object.entries(dict).forEach(([key,val]) => {
+        const el = document.getElementById(key);
+        if(el) el.textContent = val;
+      });
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.dataset.i18n;
+        if(key && Object.prototype.hasOwnProperty.call(dict, key)) {
+          el.textContent = dict[key];
+        }
+      });
+      document.querySelectorAll("[data-lang-btn]").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.langBtn === lang);
+      });
+      document.getElementById("manualRefLink").href = `CV_QuantMarketScreenerPro_InputReference_2026-05-30.html?lang=${lang}&v=landingfix1`;
+      document.getElementById("inputReferenceLink").href = `CV_QuantMarketScreenerPro_InputReference_2026-05-30.html?lang=${lang}&v=landingfix1`;
+      document.getElementById("dashboardCards").innerHTML = dashboardCards.map(card => makeVisualCard(card, lang)).join("");
+      document.getElementById("overlayCards").innerHTML = overlayCards.map(card => makeVisualCard(card, lang)).join("");
+      document.getElementById("panelCards").innerHTML = panelCards.map(card => makeVisualCard(card, lang)).join("");
+      renderCritical(lang);
+      renderPro(lang);
+      localStorage.setItem("qms_manual_lang", lang);
+      const url = new URL(window.location.href);
+      url.searchParams.set("lang", lang);
+      history.replaceState({}, "", url.toString());
+    }
+
+    function initLang(){
+      const queryLang = new URLSearchParams(window.location.search).get("lang");
+      const stored = localStorage.getItem("qms_manual_lang");
+      const lang = LANGS.includes(queryLang) ? queryLang : (LANGS.includes(stored) ? stored : "de");
+      document.querySelectorAll("[data-lang-btn]").forEach(btn => {
+        btn.addEventListener("click", () => applyText(btn.dataset.langBtn));
+      });
+      applyText(lang);
+    }
+
+    initLang();
+  </script>
+</body>
+</html>
